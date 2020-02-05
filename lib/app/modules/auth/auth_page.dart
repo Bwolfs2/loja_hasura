@@ -146,7 +146,7 @@ class _AuthPageState extends State<AuthPage> {
                         color: Theme.of(context).primaryColor
                       ),),
                       onPressed: () {
-                        Navigator.of(context).pushNamed("/register");
+                        Navigator.of(context).pushNamed("/auth/register");
                       },
                     ),
                   )
