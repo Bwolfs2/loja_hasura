@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "510123339694",
+    "firebase_url": "https://loja-hasura.firebaseio.com",
+    "project_id": "loja-hasura",
+    "storage_bucket": "loja-hasura.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510123339694:android:df14f2f4d1849f2df9a23f",
+        "android_client_info": {
+          "package_name": "br.com.loja_hasura"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510123339694-695f8rf12fg38okv85n4rto4qm6ebl3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgWeX-uOyxBkvIHKfn9pNSdrFbg5GhpxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510123339694-695f8rf12fg38okv85n4rto4qm6ebl3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
