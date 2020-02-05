@@ -43,6 +43,78 @@ mixin _$AddProdutoController on _AddProdutoBase, Store {
     }, _$valorAtom, name: '${_$valorAtom.name}_set');
   }
 
+  final _$descricaoErrorAtom = Atom(name: '_AddProdutoBase.descricaoError');
+
+  @override
+  String get descricaoError {
+    _$descricaoErrorAtom.context.enforceReadPolicy(_$descricaoErrorAtom);
+    _$descricaoErrorAtom.reportObserved();
+    return super.descricaoError;
+  }
+
+  @override
+  set descricaoError(String value) {
+    _$descricaoErrorAtom.context.conditionallyRunInAction(() {
+      super.descricaoError = value;
+      _$descricaoErrorAtom.reportChanged();
+    }, _$descricaoErrorAtom, name: '${_$descricaoErrorAtom.name}_set');
+  }
+
+  final _$valorErrorAtom = Atom(name: '_AddProdutoBase.valorError');
+
+  @override
+  String get valorError {
+    _$valorErrorAtom.context.enforceReadPolicy(_$valorErrorAtom);
+    _$valorErrorAtom.reportObserved();
+    return super.valorError;
+  }
+
+  @override
+  set valorError(String value) {
+    _$valorErrorAtom.context.conditionallyRunInAction(() {
+      super.valorError = value;
+      _$valorErrorAtom.reportChanged();
+    }, _$valorErrorAtom, name: '${_$valorErrorAtom.name}_set');
+  }
+
+  final _$selectedCategoriaErrorAtom =
+      Atom(name: '_AddProdutoBase.selectedCategoriaError');
+
+  @override
+  String get selectedCategoriaError {
+    _$selectedCategoriaErrorAtom.context
+        .enforceReadPolicy(_$selectedCategoriaErrorAtom);
+    _$selectedCategoriaErrorAtom.reportObserved();
+    return super.selectedCategoriaError;
+  }
+
+  @override
+  set selectedCategoriaError(String value) {
+    _$selectedCategoriaErrorAtom.context.conditionallyRunInAction(() {
+      super.selectedCategoriaError = value;
+      _$selectedCategoriaErrorAtom.reportChanged();
+    }, _$selectedCategoriaErrorAtom,
+        name: '${_$selectedCategoriaErrorAtom.name}_set');
+  }
+
+  final _$selectedTipoErrorAtom =
+      Atom(name: '_AddProdutoBase.selectedTipoError');
+
+  @override
+  String get selectedTipoError {
+    _$selectedTipoErrorAtom.context.enforceReadPolicy(_$selectedTipoErrorAtom);
+    _$selectedTipoErrorAtom.reportObserved();
+    return super.selectedTipoError;
+  }
+
+  @override
+  set selectedTipoError(String value) {
+    _$selectedTipoErrorAtom.context.conditionallyRunInAction(() {
+      super.selectedTipoError = value;
+      _$selectedTipoErrorAtom.reportChanged();
+    }, _$selectedTipoErrorAtom, name: '${_$selectedTipoErrorAtom.name}_set');
+  }
+
   final _$selectedCategoriaAtom =
       Atom(name: '_AddProdutoBase.selectedCategoria');
 

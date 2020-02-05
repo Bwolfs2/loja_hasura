@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loja_hasura/app/modules/auth/auth_controller.dart';
 import 'package:loja_hasura/app/modules/auth/auth_module.dart';
 import 'package:loja_hasura/app/shared/widgets/label/label_widget.dart';
+import 'package:oktoast/oktoast.dart';
 
 class AuthPage extends StatefulWidget {
   final String title;
@@ -13,6 +16,27 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   var controller = AuthModule.to.get<AuthController>();
+
+  var focusNodeEmail = FocusNode();
+  var focusNodeSenha = FocusNode();
+
+  _fieldFocsChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
+
+  Future _login() async {
+    var result = await controller.login();
+
+    if (result) {
+      Modular.to.pushReplacementNamed("/home");
+    } else {
+      showToast("Erro ao tentar efetuar o login! Tente novamente!",
+          position: ToastPosition.bottom);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,75 +79,74 @@ class _AuthPageState extends State<AuthPage> {
                   LabelWidget(
                     title: "Email:",
                   ),
-                  TextField(
-                    onChanged: controller.setEmail,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    decoration: InputDecoration(
-                      hintText: "meuemail@email.com",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return TextField(
+                      focusNode: focusNodeEmail,
+                      onChanged: controller.setEmail,
+                      onEditingComplete: () {
+                        _fieldFocsChange(
+                            context, focusNodeEmail, focusNodeSenha);
+                      },
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          hintText: "meuemail@email.com",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          errorText: controller.emailError),
+                    );
+                  }),
                   SizedBox(
                     height: 20,
                   ),
                   LabelWidget(
                     title: "Senha:",
                   ),
-                  TextField(
-                    obscureText: true,
-                    onChanged: controller.setSenha,
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    decoration: InputDecoration(
-                      hintText: "******",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return TextField(
+                      focusNode: focusNodeSenha,
+                      obscureText: true,
+                      onChanged: controller.setSenha,
+                      onEditingComplete: () async{
+                          await _login();
+                      },
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      decoration: InputDecoration(
+                          hintText: "******",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          errorText: controller.senhaError),
+                    );
+                  }),
                   SizedBox(
                     height: 40,
                   ),
-                 
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: RaisedButton(
                       color: Theme.of(context).primaryColor,
                       onPressed: () async {
-                        var result = await controller.login();
-
-                        if (result) {
-                          Navigator.of(context).pushReplacementNamed("/home");
-                        } else {
-                          showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                content: Text(
-                                    "Erro ao tentar efetuar o login! Tente novamente!"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text("Fechar"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
-                              ));
-                        }
+                        await _login();
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10),
@@ -136,17 +159,19 @@ class _AuthPageState extends State<AuthPage> {
                         ),
                       ),
                     ),
-                  ),  SizedBox(
+                  ),
+                  SizedBox(
                     height: 40,
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: FlatButton(
-                      child: Text("Criar nova Conta", style: TextStyle(
-                        color: Theme.of(context).primaryColor
-                      ),),
+                      child: Text(
+                        "Criar nova Conta",
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed("/auth/register");
+                       Modular.to.pushNamed("/auth/register");
                       },
                     ),
                   )

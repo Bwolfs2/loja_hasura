@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loja_hasura/app/modules/splash/splash_controller.dart';
 import 'package:loja_hasura/app/modules/splash/splash_module.dart';
 
@@ -16,9 +17,9 @@ class _SplashPageState extends State<SplashPage> {
     var result = await controller.checkLogin();
 
     if (result) {
-      Navigator.of(context).pushReplacementNamed("/home");
+      Modular.to.pushReplacementNamed("/home");
     } else {
-      Navigator.of(context).pushReplacementNamed("/auth");
+      Modular.to.pushReplacementNamed("/auth");
     }
   }
 

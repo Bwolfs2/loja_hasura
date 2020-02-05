@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'register_controller.g.dart';
 
 class RegisterController = _RegisterBase with _$RegisterController;
 
 abstract class _RegisterBase with Store {
-  final SharedPreferences shared;
-  _RegisterBase(this.shared);
+
 
   @observable
   String email = "";
@@ -17,6 +15,11 @@ abstract class _RegisterBase with Store {
 
   @observable
   String confirmacaoSenha = "";
+
+  @observable
+  String emailError;
+  @observable
+  String senhaError;
 
   @action
   void setEmail(String _email) => email = _email;
@@ -29,7 +32,31 @@ abstract class _RegisterBase with Store {
 
   @action
   Future<bool> criarConta() async {
+    email = email.trim();
+    senha = senha.trim();
+
+    var valid = true;
+
+    if (email == null || !email.contains("@")) {
+      emailError = "Email invalido !!!";
+      valid = false;
+    } else {
+      emailError = null;
+    }
+
+    if (senha == null || senha.length == 0) {
+      senhaError = "Senha invalida !!!";
+      valid = false;
+    } else {
+      senhaError = null;
+    }
+
     if (senha != confirmacaoSenha) {
+      senhaError = "Senha de confirmacao nao bate com a senha informada!!!";
+      valid = false;
+    }
+
+    if (!valid) {
       return false;
     }
 
@@ -41,11 +68,7 @@ abstract class _RegisterBase with Store {
         .user;
 
     var tokenId = await user.getIdToken();
-    var valid = tokenId != null;
-
-    if (valid) {
-      shared.setString("token", tokenId.token);
-    }
+    valid = tokenId != null;
 
     return valid;
   }

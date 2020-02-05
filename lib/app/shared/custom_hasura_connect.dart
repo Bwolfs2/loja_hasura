@@ -1,18 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomHasuraConnect {
-  static HasuraConnect getConnect(SharedPreferences shared) {
-    if (shared.containsKey('token')) {
-      String token = shared.get('token');
-      return HasuraConnect(
-        "https://loja-hasura.herokuapp.com/v1/graphql",
-        token: (_) async => 'Bearer $token',
-      );
-    } else {
-      return HasuraConnect(
-        "https://loja-hasura.herokuapp.com/v1/graphql",
-      );
-    }
+  static HasuraConnect getConnect(FirebaseAuth auth) {
+    return HasuraConnect(
+      "https://loja-hasura.herokuapp.com/v1/graphql",
+      token: (_) async {
+        var user = await auth.currentUser();
+
+        var token = await user.getIdToken(refresh: true);
+
+        if (token != null) {
+          return "Bearer ${token.token}";
+        } else {
+         Modular.to.pushReplacementNamed("/login");
+        }
+      },
+    );
   }
 }

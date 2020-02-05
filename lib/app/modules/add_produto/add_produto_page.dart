@@ -1,6 +1,7 @@
 import 'package:find_dropdown/find_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loja_hasura/app/modules/add_produto/add_produto_controller.dart';
 import 'package:loja_hasura/app/modules/add_produto/add_produto_module.dart';
 import 'package:loja_hasura/app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
@@ -64,45 +65,55 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                   LabelWidget(
                     title: "Descricao:",
                   ),
-                  TextField(
-                    onChanged: controller.setDescricao,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    decoration: InputDecoration(
-                      hintText: "Descricao do Produto",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return TextField(
+                      onChanged: controller.setDescricao,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      decoration: InputDecoration(
+                          hintText: "Descricao do Produto",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          errorText: controller.descricaoError),
+                    );
+                  }),
                   SizedBox(
                     height: 20,
                   ),
                   LabelWidget(
                     title: "Valor:",
                   ),
-                  TextField(
-                    onChanged: controller.setValor,
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    decoration: InputDecoration(
-                      hintText: "Valor",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return TextField(
+                      onChanged: controller.setValor,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      decoration: InputDecoration(
+                          hintText: "Valor",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          errorText: controller.valorError),
+                    );
+                  }),
                   SizedBox(
                     height: 20,
                   ),
@@ -130,14 +141,14 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                       }
 
                       return CustomComboboxWidget(
-                        items: controller.tipoProduto.categoriaProduto
-                            .map((data) => Model(data.id, data.descricao))
-                            .toList(),
-                        onChange: (tipo) => controller.setSelectedCategoria(
-                            TipoECategoriaDto(
-                                id: tipo.id, descricao: tipo.descricao)),
-                        itemSelecionado: null,
-                      );
+                          items: controller.tipoProduto.categoriaProduto
+                              .map((data) => Model(data.id, data.descricao))
+                              .toList(),
+                          onChange: (tipo) => controller.setSelectedCategoria(
+                              TipoECategoriaDto(
+                                  id: tipo.id, descricao: tipo.descricao)),
+                          itemSelecionado: null,
+                          errorText: controller.selectedCategoriaError);
                     },
                   ),
                   LabelWidget(
@@ -163,14 +174,14 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                             ));
                       }
                       return CustomComboboxWidget(
-                        items: controller.tipoProduto.tipoProduto
-                            .map((data) => Model(data.id, data.descricao))
-                            .toList(),
-                        onChange: (tipo) => controller.setSelectedTipo(
-                            TipoECategoriaDto(
-                                id: tipo.id, descricao: tipo.descricao)),
-                        itemSelecionado: null,
-                      );
+                          items: controller.tipoProduto.tipoProduto
+                              .map((data) => Model(data.id, data.descricao))
+                              .toList(),
+                          onChange: (tipo) => controller.setSelectedTipo(
+                              TipoECategoriaDto(
+                                  id: tipo.id, descricao: tipo.descricao)),
+                          itemSelecionado: null,
+                          errorText: controller.selectedTipoError);
                     },
                   ),
                   SizedBox(
@@ -184,17 +195,18 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                         var result = await controller.salvar();
 
                         if (result) {
-                          Navigator.of(context).pop();
+                         Modular.to.pop();
                         } else {
                           showDialog(
                               context: context,
                               child: AlertDialog(
-                                content: Text("Erro ao tentar salvar o produto!"),
+                                content:
+                                    Text("Erro ao tentar salvar o produto!"),
                                 actions: <Widget>[
                                   FlatButton(
                                     child: Text("Fechar"),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Modular.to.pop();
                                     },
                                   )
                                 ],

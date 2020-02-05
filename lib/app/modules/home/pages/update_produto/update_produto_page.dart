@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loja_hasura/app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
 import 'package:loja_hasura/app/modules/home/pages/update_produto/update_produto_controller.dart';
 import 'package:loja_hasura/app/shared/custom_combobox/custom_combobox_widget.dart';
@@ -77,22 +78,22 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                       return TextField(
                         onChanged: controller.setDescricao,
                         style: TextStyle(color: Theme.of(context).primaryColor),
-                        controller:controller.descricaoController,
+                        controller: controller.descricaoController,
                         decoration: InputDecoration(
-                          hintText: "Descricao do Produto",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                        ),
+                            hintText: "Descricao do Produto",
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2)),
+                            errorText: controller.descricaoError),
                       );
                     },
                   ),
@@ -105,25 +106,25 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                   Observer(
                     builder: (BuildContext context) {
                       return TextField(
-                        controller:controller.valorController,
+                        controller: controller.valorController,
                         onChanged: controller.setValor,
                         keyboardType: TextInputType.number,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                         decoration: InputDecoration(
-                          hintText: "Valor",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                        ),
+                            hintText: "Valor",
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2)),
+                            errorText: controller.valorError),
                       );
                     },
                   ),
@@ -154,17 +155,17 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                       }
 
                       return CustomComboboxWidget(
-                        items: controller.updatedProduto.categoriaProduto
-                            .map((data) => Model(data.id, data.descricao))
-                            .toList(),
-                        onChange: (tipo) => controller.setSelectedCategoria(
-                            TipoECategoriaDto(
-                                id: tipo.id, descricao: tipo.descricao)),
-                        itemSelecionado: controller.selectedCategoria == null
-                            ? controller.selectedCategoria
-                            : Model(controller.selectedCategoria.id,
-                                controller.selectedCategoria.descricao),
-                      );
+                          items: controller.updatedProduto.categoriaProduto
+                              .map((data) => Model(data.id, data.descricao))
+                              .toList(),
+                          onChange: (tipo) => controller.setSelectedCategoria(
+                              TipoECategoriaDto(
+                                  id: tipo.id, descricao: tipo.descricao)),
+                          itemSelecionado: controller.selectedCategoria == null
+                              ? controller.selectedCategoria
+                              : Model(controller.selectedCategoria.id,
+                                  controller.selectedCategoria.descricao),
+                          errorText: controller.selectedCategoriaError);
                     },
                   ),
                   LabelWidget(
@@ -190,17 +191,17 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                             ));
                       }
                       return CustomComboboxWidget(
-                        items: controller.updatedProduto.tipoProduto
-                            .map((data) => Model(data.id, data.descricao))
-                            .toList(),
-                        onChange: (tipo) => controller.setSelectedTipo(
-                            TipoECategoriaDto(
-                                id: tipo.id, descricao: tipo.descricao)),
-                        itemSelecionado: controller.selectedTipo == null
-                            ? null
-                            : Model(controller.selectedTipo.id,
-                                controller.selectedTipo.descricao),
-                      );
+                          items: controller.updatedProduto.tipoProduto
+                              .map((data) => Model(data.id, data.descricao))
+                              .toList(),
+                          onChange: (tipo) => controller.setSelectedTipo(
+                              TipoECategoriaDto(
+                                  id: tipo.id, descricao: tipo.descricao)),
+                          itemSelecionado: controller.selectedTipo == null
+                              ? null
+                              : Model(controller.selectedTipo.id,
+                                  controller.selectedTipo.descricao),
+                          errorText: controller.selectedTipoError);
                     },
                   ),
                   SizedBox(
@@ -214,7 +215,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                         var result = await controller.salvar();
 
                         if (result) {
-                          Navigator.of(context).pop();
+                        Modular.to.pop();
                         } else {
                           showDialog(
                               context: context,
@@ -225,7 +226,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                                   FlatButton(
                                     child: Text("Fechar"),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Modular.to.pop();
                                     },
                                   )
                                 ],

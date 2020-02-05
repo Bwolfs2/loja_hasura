@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.3.0 <3.0.0"
 
 dependencies:  
+  oktoast: ^2.3.0
   shared_preferences: ^0.5.6
   firebase_auth: ^0.15.3+1
   find_dropdown: 
@@ -25,7 +26,7 @@ dependencies:
   dio: ^3.0.8
   flutter_mobx: ^0.3.6
   mobx: ^0.4.0+1
-  flutter_modular: ^0.2.1
+  flutter_modular: ^0.4.2
   flutter:
     sdk: flutter
 

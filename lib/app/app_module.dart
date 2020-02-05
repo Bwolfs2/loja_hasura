@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:loja_hasura/app/shared/custom_combobox/custom_combobox_controller.dart';
 import 'package:loja_hasura/app/app_controller.dart';
@@ -21,8 +22,9 @@ class AppModule extends MainModule {
         Bind((i) => CustomComboboxController()),
         Bind((i) => AppController()),
         //Outros
-        Bind((i) => CustomHasuraConnect.getConnect(shared)),
+        Bind((i) => CustomHasuraConnect.getConnect(i.get<FirebaseAuth>())),
         Bind((i) => shared),
+        Bind((i) => FirebaseAuth.instance),
       ];
 
   @override

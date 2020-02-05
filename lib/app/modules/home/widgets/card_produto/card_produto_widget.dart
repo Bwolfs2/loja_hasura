@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CardProdutoWidget extends StatelessWidget {
   final String nomeProduto;
@@ -20,7 +21,7 @@ class CardProdutoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/home/UpdateProduto/$idProduto');
+         Modular.to.pushNamed('/home/UpdateProduto/$idProduto');
       },
       child: Card(
         child: Stack(

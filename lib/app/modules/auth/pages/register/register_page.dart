@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loja_hasura/app/shared/widgets/label/label_widget.dart';
 
 import '../../auth_module.dart';
@@ -59,22 +61,29 @@ class _RegisterPageState extends State<RegisterPage> {
                   LabelWidget(
                     title: "Email:",
                   ),
-                  TextField(
-                    onChanged: controller.setEmail,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    decoration: InputDecoration(
-                      hintText: "meuemail@email.com",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                    ),
-                  ),
+                  Observer(builder: (_) {
+                    return TextField(
+                      onChanged: controller.setEmail,
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      decoration: InputDecoration(
+                        hintText: "meuemail@email.com",
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
+                                errorText: controller.emailError
+                      ),
+                    );
+                  }),
                   SizedBox(
                     height: 20,
                   ),
@@ -84,7 +93,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   TextField(
                     obscureText: true,
                     onChanged: controller.setSenha,
-                    keyboardType: TextInputType.number,
                     style: TextStyle(color: Theme.of(context).primaryColor),
                     decoration: InputDecoration(
                       hintText: "******",
@@ -97,6 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Theme.of(context).primaryColor, width: 2)),
+                              errorText: controller.senhaError
                     ),
                   ),
                   SizedBox(
@@ -108,7 +117,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   TextField(
                     obscureText: true,
                     onChanged: controller.setConfirmacaoSenha,
-                    keyboardType: TextInputType.number,
                     style: TextStyle(color: Theme.of(context).primaryColor),
                     decoration: InputDecoration(
                       hintText: "******",
@@ -134,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         var result = await controller.criarConta();
 
                         if (result) {
-                          Navigator.of(context).pushReplacementNamed("/home");
+                         Modular.to.pushReplacementNamed("/home");
                         } else {
                           showDialog(
                               context: context,
@@ -145,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   FlatButton(
                                     child: Text("Fechar"),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                     Modular.to.pop();
                                     },
                                   )
                                 ],

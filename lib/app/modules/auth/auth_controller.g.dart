@@ -43,6 +43,40 @@ mixin _$AuthController on _AuthBase, Store {
     }, _$senhaAtom, name: '${_$senhaAtom.name}_set');
   }
 
+  final _$emailErrorAtom = Atom(name: '_AuthBase.emailError');
+
+  @override
+  String get emailError {
+    _$emailErrorAtom.context.enforceReadPolicy(_$emailErrorAtom);
+    _$emailErrorAtom.reportObserved();
+    return super.emailError;
+  }
+
+  @override
+  set emailError(String value) {
+    _$emailErrorAtom.context.conditionallyRunInAction(() {
+      super.emailError = value;
+      _$emailErrorAtom.reportChanged();
+    }, _$emailErrorAtom, name: '${_$emailErrorAtom.name}_set');
+  }
+
+  final _$senhaErrorAtom = Atom(name: '_AuthBase.senhaError');
+
+  @override
+  String get senhaError {
+    _$senhaErrorAtom.context.enforceReadPolicy(_$senhaErrorAtom);
+    _$senhaErrorAtom.reportObserved();
+    return super.senhaError;
+  }
+
+  @override
+  set senhaError(String value) {
+    _$senhaErrorAtom.context.conditionallyRunInAction(() {
+      super.senhaError = value;
+      _$senhaErrorAtom.reportChanged();
+    }, _$senhaErrorAtom, name: '${_$senhaErrorAtom.name}_set');
+  }
+
   final _$loginAsyncAction = AsyncAction('login');
 
   @override
