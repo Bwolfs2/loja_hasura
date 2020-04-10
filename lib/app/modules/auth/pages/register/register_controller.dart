@@ -6,8 +6,6 @@ part 'register_controller.g.dart';
 class RegisterController = _RegisterBase with _$RegisterController;
 
 abstract class _RegisterBase with Store {
-
-
   @observable
   String email = "";
   @observable
@@ -60,8 +58,8 @@ abstract class _RegisterBase with Store {
       return false;
     }
 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+    final _auth = FirebaseAuth.instance;
+    final user = (await _auth.createUserWithEmailAndPassword(
       email: email,
       password: senha,
     ))

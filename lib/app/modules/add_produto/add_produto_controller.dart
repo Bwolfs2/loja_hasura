@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 import 'models/tipo_categoria_produto_dto.dart';
@@ -6,6 +5,7 @@ import 'repositories/add_produto_repository.dart';
 
 part 'add_produto_controller.g.dart';
 
+///meu metodo faz x coisas
 class AddProdutoController = _AddProdutoBase with _$AddProdutoController;
 
 abstract class _AddProdutoBase with Store {
@@ -33,13 +33,13 @@ abstract class _AddProdutoBase with Store {
   String selectedTipoError;
 
   @action
-  setDescricao(String _desc) {
+  void setDescricao(String _desc) {
     descricao = _desc;
     _validDescricao();
   }
 
   @action
-  setValor(String _valor) {
+  void setValor(String _valor) {
     valor = _valor;
     _validValor();
   }
@@ -48,7 +48,7 @@ abstract class _AddProdutoBase with Store {
   TipoECategoriaDto selectedCategoria;
 
   @action
-  setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
+  void setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
     selectedCategoria = _selectedCategoria;
   }
 
@@ -56,16 +56,16 @@ abstract class _AddProdutoBase with Store {
   TipoECategoriaDto selectedTipo;
 
   @action
-  setSelectedTipo(TipoECategoriaDto _selectedTipo) {
+  void setSelectedTipo(TipoECategoriaDto _selectedTipo) {
     selectedTipo = _selectedTipo;
   }
 
   @observable
   TipoCategoriaProdutoDto tipoProduto;
 
-  var isValid = true;
+  bool isValid = true;
 
-  _validDescricao() {
+  void _validDescricao() {
     descricao = descricao.trim();
     if (descricao == null || descricao.length == 0) {
       descricaoError = "Descricao invalida!!";

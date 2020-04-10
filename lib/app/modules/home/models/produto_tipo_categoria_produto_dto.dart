@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:loja_hasura/app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
+import '../../../../app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
 
 class ProdutoTipoCategoriaProdutoDto {
   final List<TipoECategoriaDto> tipoProduto;

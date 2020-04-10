@@ -1,25 +1,22 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
-
+import 'package:flutter_test/flutter_test.dart';
 import 'package:loja_hasura/app/modules/add_produto/repositories/add_produto_repository.dart';
+import 'package:mockito/mockito.dart';
 
 class MockClient extends Mock implements Dio {}
 
 void main() {
   AddProdutoRepository repository;
-  MockClient client;
+  // MockClient client;
 
   setUp(() {
     repository = AddProdutoRepository(null);
-    client = MockClient();
+    //  client = MockClient();
   });
 
   group('AddProdutoRepository Test', () {
     test("First Test", () {
       expect(repository, isInstanceOf<AddProdutoRepository>());
     });
-
-
   });
 }

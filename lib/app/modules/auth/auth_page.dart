@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_hasura/app/modules/auth/auth_controller.dart';
-import 'package:loja_hasura/app/modules/auth/auth_module.dart';
-import 'package:loja_hasura/app/shared/widgets/label/label_widget.dart';
 import 'package:oktoast/oktoast.dart';
+
+import '../../../app/modules/auth/auth_controller.dart';
+import '../../../app/modules/auth/auth_module.dart';
+import '../../../app/shared/widgets/label/label_widget.dart';
 
 class AuthPage extends StatefulWidget {
   final String title;
@@ -15,10 +16,10 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  var controller = AuthModule.to.get<AuthController>();
+  AuthController controller = AuthModule.to.get<AuthController>();
 
-  var focusNodeEmail = FocusNode();
-  var focusNodeSenha = FocusNode();
+  FocusNode focusNodeEmail = FocusNode();
+  FocusNode focusNodeSenha = FocusNode();
 
   _fieldFocsChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
@@ -117,8 +118,8 @@ class _AuthPageState extends State<AuthPage> {
                       focusNode: focusNodeSenha,
                       obscureText: true,
                       onChanged: controller.setSenha,
-                      onEditingComplete: () async{
-                          await _login();
+                      onEditingComplete: () async {
+                        await _login();
                       },
                       style: TextStyle(color: Theme.of(context).primaryColor),
                       decoration: InputDecoration(
@@ -171,7 +172,7 @@ class _AuthPageState extends State<AuthPage> {
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
                       onPressed: () {
-                       Modular.to.pushNamed("/auth/register");
+                        Modular.to.pushNamed("/auth/register");
                       },
                     ),
                   )

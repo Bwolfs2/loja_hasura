@@ -2,10 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_hasura/app/modules/home/home_controller.dart';
-import 'package:loja_hasura/app/modules/home/home_module.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../app/modules/home/home_controller.dart';
+import '../../../app/modules/home/home_module.dart';
 import 'widgets/card_produto/card_produto_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,15 +30,14 @@ class _HomePageState extends State<HomePage> {
                 Icons.power_settings_new,
               ),
               onPressed: () async {
-                var user = await FirebaseAuth.instance.currentUser();
-                user.delete();
+                await FirebaseAuth.instance.signOut();
                 Modular.to.pushReplacementNamed("/auth");
               },
             )
           ],
         ),
         body: Observer(
-          builder: (BuildContext context) {
+          builder: (context) {
             if (homeController.listaProdutos.hasError) {
               return Center(
                 child: Text("Ocorreu um erro ao realizar essa requisição."),
@@ -56,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                     .compareTo(produto2.nome.toLowerCase()));
             return ListView.builder(
               itemCount: homeController.listaProdutos.value.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 return CardProdutoWidget(
                   nomeProduto: homeController.listaProdutos.value[index].nome,
                   valor: homeController.listaProdutos.value[index].valor
@@ -82,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       onWillPop: () async {
-        bool result = false;
+        var result = false;
 
         await showDialog(
             context: context,
@@ -92,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                 FlatButton(
                   onPressed: () {
                     result = true;
-                     Modular.to.pop();
+                    Modular.to.pop();
                   },
                   child: Text("Sim"),
                 ),

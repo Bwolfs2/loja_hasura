@@ -47,8 +47,8 @@ abstract class _AuthBase with Store {
       return false;
     }
 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseUser user = (await _auth.signInWithEmailAndPassword(
+    final _auth = FirebaseAuth.instance;
+    final user = (await _auth.signInWithEmailAndPassword(
       email: email,
       password: senha,
     ))

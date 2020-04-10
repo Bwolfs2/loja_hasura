@@ -14,7 +14,8 @@ class CustomHasuraConnect {
         if (token != null) {
           return "Bearer ${token.token}";
         } else {
-         Modular.to.pushReplacementNamed("/login");
+          Modular.to.pushReplacementNamed("/login");
+          return null;
         }
       },
     );

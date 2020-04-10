@@ -1,12 +1,12 @@
-import 'package:find_dropdown/find_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_hasura/app/modules/add_produto/add_produto_controller.dart';
-import 'package:loja_hasura/app/modules/add_produto/add_produto_module.dart';
-import 'package:loja_hasura/app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
-import 'package:loja_hasura/app/shared/custom_combobox/custom_combobox_widget.dart';
-import 'package:loja_hasura/app/shared/widgets/label/label_widget.dart';
+
+import '../../../app/modules/add_produto/add_produto_controller.dart';
+import '../../../app/modules/add_produto/add_produto_module.dart';
+import '../../../app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
+import '../../../app/shared/custom_combobox/custom_combobox_widget.dart';
+import '../../../app/shared/widgets/label/label_widget.dart';
 
 class AddProdutoPage extends StatefulWidget {
   final String title;
@@ -121,7 +121,7 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                     title: "Categoria do Produto:",
                   ),
                   Observer(
-                    builder: (BuildContext context) {
+                    builder: (context) {
                       if (controller.tipoProduto == null) {
                         return Container(
                             decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                     title: "Tipo Produto:",
                   ),
                   Observer(
-                    builder: (BuildContext context) {
+                    builder: (context) {
                       if (controller.tipoProduto == null) {
                         return Container(
                             decoration: BoxDecoration(
@@ -195,7 +195,7 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                         var result = await controller.salvar();
 
                         if (result) {
-                         Modular.to.pop();
+                          Modular.to.pop();
                         } else {
                           showDialog(
                               context: context,

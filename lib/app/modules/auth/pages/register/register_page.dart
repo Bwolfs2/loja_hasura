@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_hasura/app/shared/widgets/label/label_widget.dart';
 
+import '../../../../../app/shared/widgets/label/label_widget.dart';
 import '../../auth_module.dart';
 import 'register_controller.dart';
 
@@ -67,21 +67,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       keyboardType: TextInputType.emailAddress,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                       decoration: InputDecoration(
-                        hintText: "meuemail@email.com",
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                                errorText: controller.emailError
-                      ),
+                          hintText: "meuemail@email.com",
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2)),
+                          errorText: controller.emailError),
                     );
                   }),
                   SizedBox(
@@ -95,18 +94,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     onChanged: controller.setSenha,
                     style: TextStyle(color: Theme.of(context).primaryColor),
                     decoration: InputDecoration(
-                      hintText: "******",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                              errorText: controller.senhaError
-                    ),
+                        hintText: "******",
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
+                        errorText: controller.senhaError),
                   ),
                   SizedBox(
                     height: 20,
@@ -142,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         var result = await controller.criarConta();
 
                         if (result) {
-                         Modular.to.pushReplacementNamed("/home");
+                          Modular.to.pushReplacementNamed("/home");
                         } else {
                           showDialog(
                               context: context,
@@ -153,7 +154,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   FlatButton(
                                     child: Text("Fechar"),
                                     onPressed: () {
-                                     Modular.to.pop();
+                                      Modular.to.pop();
                                     },
                                   )
                                 ],

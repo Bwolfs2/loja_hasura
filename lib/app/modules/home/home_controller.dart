@@ -1,6 +1,6 @@
-import 'package:loja_hasura/app/modules/home/models/produto_model.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../app/modules/home/models/produto_model.dart';
 import 'repositories/home_repository.dart';
 
 part 'home_controller.g.dart';

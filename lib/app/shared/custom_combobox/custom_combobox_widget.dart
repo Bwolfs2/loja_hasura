@@ -21,7 +21,7 @@ class CustomComboboxWidget extends StatelessWidget {
       children: <Widget>[
         FindDropdown<Model>(
           items: items,
-          onChanged: (Model item) => onChange(item),
+          onChanged: onChange,
           selectedItem: itemSelecionado,
           dropdownBuilder: (_, model) {
             return Container(

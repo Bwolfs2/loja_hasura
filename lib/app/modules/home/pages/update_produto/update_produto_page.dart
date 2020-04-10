@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_hasura/app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
-import 'package:loja_hasura/app/modules/home/pages/update_produto/update_produto_controller.dart';
-import 'package:loja_hasura/app/shared/custom_combobox/custom_combobox_widget.dart';
-import 'package:loja_hasura/app/shared/widgets/label/label_widget.dart';
 
+import '../../../../../app/shared/widgets/label/label_widget.dart';
+import '../../../../modules/add_produto/models/tipo_categoria_produto_dto.dart';
+import '../../../../modules/home/pages/update_produto/update_produto_controller.dart';
+import '../../../../shared/custom_combobox/custom_combobox_widget.dart';
 import '../../home_module.dart';
 
 class UpdateProdutoPage extends StatefulWidget {
@@ -74,7 +74,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     title: "Descricao:",
                   ),
                   Observer(
-                    builder: (BuildContext context) {
+                    builder: (context) {
                       return TextField(
                         onChanged: controller.setDescricao,
                         style: TextStyle(color: Theme.of(context).primaryColor),
@@ -104,7 +104,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     title: "Valor:",
                   ),
                   Observer(
-                    builder: (BuildContext context) {
+                    builder: (context) {
                       return TextField(
                         controller: controller.valorController,
                         onChanged: controller.setValor,
@@ -135,7 +135,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     title: "Categoria do Produto:",
                   ),
                   Observer(
-                    builder: (BuildContext context) {
+                    builder: (context) {
                       if (controller.updatedProduto == null) {
                         return Container(
                             decoration: BoxDecoration(
@@ -172,7 +172,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     title: "Tipo Produto:",
                   ),
                   Observer(
-                    builder: (BuildContext context) {
+                    builder: (context) {
                       if (controller.updatedProduto == null) {
                         return Container(
                             decoration: BoxDecoration(
@@ -215,7 +215,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                         var result = await controller.salvar();
 
                         if (result) {
-                        Modular.to.pop();
+                          Modular.to.pop();
                         } else {
                           showDialog(
                               context: context,

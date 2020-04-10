@@ -4,15 +4,21 @@
 
 import 'dart:convert';
 
+///
 class TipoCategoriaProdutoDto {
+  ///tipos de produtos
   final List<TipoECategoriaDto> tipoProduto;
+
+  ///categoria de produtos
   final List<TipoECategoriaDto> categoriaProduto;
 
+  ///
   TipoCategoriaProdutoDto({
     this.tipoProduto,
     this.categoriaProduto,
   });
 
+  ///
   TipoCategoriaProdutoDto copyWith({
     List<TipoECategoriaDto> tipoProduto,
     List<TipoECategoriaDto> categoriaProduto,

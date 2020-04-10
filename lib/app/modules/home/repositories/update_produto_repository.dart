@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
-import 'package:loja_hasura/app/modules/home/models/produto_tipo_categoria_produto_dto.dart';
+
+import '../../../../app/modules/home/models/produto_tipo_categoria_produto_dto.dart';
 
 class UpdateProdutoRepository extends Disposable {
   final HasuraConnect _hasuraConnect;
@@ -72,7 +73,7 @@ class UpdateProdutoRepository extends Disposable {
       });
 
       return snapshot["data"]["update_produto"]["affected_rows"] > 0;
-    } catch (e) {
+    } on Exception {
       return false;
     }
   }

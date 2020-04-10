@@ -1,9 +1,7 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-
-import 'package:loja_hasura/app/shared/custom_combobox/custom_combobox_controller.dart';
 import 'package:loja_hasura/app/app_module.dart';
+import 'package:loja_hasura/app/shared/custom_combobox/custom_combobox_controller.dart';
 
 void main() {
   initModule(AppModule());

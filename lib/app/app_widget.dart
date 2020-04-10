@@ -6,10 +6,9 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Loja Hasura',
+      navigatorKey: Modular.navigatorKey,
       theme: ThemeData(
-        primaryColor: Color(0xff797ec2),
-        accentColor: Color(0xff72afdd)
-      ),
+          primaryColor: Color(0xff797ec2), accentColor: Color(0xff72afdd)),
       initialRoute: '/',
       onGenerateRoute: Modular.generateRoute,
     );

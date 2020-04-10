@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_hasura/app/modules/splash/splash_controller.dart';
-import 'package:loja_hasura/app/modules/splash/splash_module.dart';
+
+import '../../../app/modules/splash/splash_controller.dart';
+import '../../../app/modules/splash/splash_module.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;
@@ -12,8 +13,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  var controller = SplashModule.to.get<SplashController>();
-  checkLogin() async {
+  final SplashController controller = SplashModule.to.get<SplashController>();
+  void checkLogin() async {
     var result = await controller.checkLogin();
 
     if (result) {

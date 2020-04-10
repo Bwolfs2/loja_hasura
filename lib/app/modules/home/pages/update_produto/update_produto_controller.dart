@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:loja_hasura/app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
-import 'package:loja_hasura/app/modules/home/models/produto_tipo_categoria_produto_dto.dart';
-import 'package:loja_hasura/app/modules/home/repositories/update_produto_repository.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../../../app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
+import '../../../../../app/modules/home/models/produto_tipo_categoria_produto_dto.dart';
+import '../../../../../app/modules/home/repositories/update_produto_repository.dart';
 
 part 'update_produto_controller.g.dart';
 
@@ -26,8 +27,8 @@ abstract class _UpdateProdutoBase with Store {
     });
   }
 
-  var descricaoController = TextEditingController();
-  var valorController = TextEditingController();
+  final TextEditingController descricaoController = TextEditingController();
+  final TextEditingController valorController = TextEditingController();
 
   @observable
   String descricao = "";
@@ -51,31 +52,31 @@ abstract class _UpdateProdutoBase with Store {
   String selectedTipoError;
 
   @action
-  setDescricao(String _desc) {
+  void setDescricao(String _desc) {
     descricao = _desc;
     _validDescricao();
   }
 
   @action
-  setValor(String _valor) {
+  void setValor(String _valor) {
     valor = _valor;
     _validValor();
   }
 
   @action
-  setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
+  void setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
     selectedCategoria = _selectedCategoria;
   }
 
   @action
-  setSelectedTipo(TipoECategoriaDto _selectedTipo) {
+  void setSelectedTipo(TipoECategoriaDto _selectedTipo) {
     selectedTipo = _selectedTipo;
   }
 
   @observable
   ProdutoTipoCategoriaProdutoDto updatedProduto;
 
-  var isValid = true;
+  bool isValid = true;
 
   _validDescricao() {
     descricao = descricao.trim();
