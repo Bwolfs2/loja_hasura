@@ -6,41 +6,37 @@ part of 'update_produto_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
   final _$descricaoAtom = Atom(name: '_UpdateProdutoBase.descricao');
 
   @override
   String get descricao {
-    _$descricaoAtom.context.enforceReadPolicy(_$descricaoAtom);
-    _$descricaoAtom.reportObserved();
+    _$descricaoAtom.reportRead();
     return super.descricao;
   }
 
   @override
   set descricao(String value) {
-    _$descricaoAtom.context.conditionallyRunInAction(() {
+    _$descricaoAtom.reportWrite(value, super.descricao, () {
       super.descricao = value;
-      _$descricaoAtom.reportChanged();
-    }, _$descricaoAtom, name: '${_$descricaoAtom.name}_set');
+    });
   }
 
   final _$valorAtom = Atom(name: '_UpdateProdutoBase.valor');
 
   @override
   String get valor {
-    _$valorAtom.context.enforceReadPolicy(_$valorAtom);
-    _$valorAtom.reportObserved();
+    _$valorAtom.reportRead();
     return super.valor;
   }
 
   @override
   set valor(String value) {
-    _$valorAtom.context.conditionallyRunInAction(() {
+    _$valorAtom.reportWrite(value, super.valor, () {
       super.valor = value;
-      _$valorAtom.reportChanged();
-    }, _$valorAtom, name: '${_$valorAtom.name}_set');
+    });
   }
 
   final _$selectedCategoriaAtom =
@@ -48,68 +44,60 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   TipoECategoriaDto get selectedCategoria {
-    _$selectedCategoriaAtom.context.enforceReadPolicy(_$selectedCategoriaAtom);
-    _$selectedCategoriaAtom.reportObserved();
+    _$selectedCategoriaAtom.reportRead();
     return super.selectedCategoria;
   }
 
   @override
   set selectedCategoria(TipoECategoriaDto value) {
-    _$selectedCategoriaAtom.context.conditionallyRunInAction(() {
+    _$selectedCategoriaAtom.reportWrite(value, super.selectedCategoria, () {
       super.selectedCategoria = value;
-      _$selectedCategoriaAtom.reportChanged();
-    }, _$selectedCategoriaAtom, name: '${_$selectedCategoriaAtom.name}_set');
+    });
   }
 
   final _$selectedTipoAtom = Atom(name: '_UpdateProdutoBase.selectedTipo');
 
   @override
   TipoECategoriaDto get selectedTipo {
-    _$selectedTipoAtom.context.enforceReadPolicy(_$selectedTipoAtom);
-    _$selectedTipoAtom.reportObserved();
+    _$selectedTipoAtom.reportRead();
     return super.selectedTipo;
   }
 
   @override
   set selectedTipo(TipoECategoriaDto value) {
-    _$selectedTipoAtom.context.conditionallyRunInAction(() {
+    _$selectedTipoAtom.reportWrite(value, super.selectedTipo, () {
       super.selectedTipo = value;
-      _$selectedTipoAtom.reportChanged();
-    }, _$selectedTipoAtom, name: '${_$selectedTipoAtom.name}_set');
+    });
   }
 
   final _$descricaoErrorAtom = Atom(name: '_UpdateProdutoBase.descricaoError');
 
   @override
   String get descricaoError {
-    _$descricaoErrorAtom.context.enforceReadPolicy(_$descricaoErrorAtom);
-    _$descricaoErrorAtom.reportObserved();
+    _$descricaoErrorAtom.reportRead();
     return super.descricaoError;
   }
 
   @override
   set descricaoError(String value) {
-    _$descricaoErrorAtom.context.conditionallyRunInAction(() {
+    _$descricaoErrorAtom.reportWrite(value, super.descricaoError, () {
       super.descricaoError = value;
-      _$descricaoErrorAtom.reportChanged();
-    }, _$descricaoErrorAtom, name: '${_$descricaoErrorAtom.name}_set');
+    });
   }
 
   final _$valorErrorAtom = Atom(name: '_UpdateProdutoBase.valorError');
 
   @override
   String get valorError {
-    _$valorErrorAtom.context.enforceReadPolicy(_$valorErrorAtom);
-    _$valorErrorAtom.reportObserved();
+    _$valorErrorAtom.reportRead();
     return super.valorError;
   }
 
   @override
   set valorError(String value) {
-    _$valorErrorAtom.context.conditionallyRunInAction(() {
+    _$valorErrorAtom.reportWrite(value, super.valorError, () {
       super.valorError = value;
-      _$valorErrorAtom.reportChanged();
-    }, _$valorErrorAtom, name: '${_$valorErrorAtom.name}_set');
+    });
   }
 
   final _$selectedCategoriaErrorAtom =
@@ -117,19 +105,16 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   String get selectedCategoriaError {
-    _$selectedCategoriaErrorAtom.context
-        .enforceReadPolicy(_$selectedCategoriaErrorAtom);
-    _$selectedCategoriaErrorAtom.reportObserved();
+    _$selectedCategoriaErrorAtom.reportRead();
     return super.selectedCategoriaError;
   }
 
   @override
   set selectedCategoriaError(String value) {
-    _$selectedCategoriaErrorAtom.context.conditionallyRunInAction(() {
+    _$selectedCategoriaErrorAtom
+        .reportWrite(value, super.selectedCategoriaError, () {
       super.selectedCategoriaError = value;
-      _$selectedCategoriaErrorAtom.reportChanged();
-    }, _$selectedCategoriaErrorAtom,
-        name: '${_$selectedCategoriaErrorAtom.name}_set');
+    });
   }
 
   final _$selectedTipoErrorAtom =
@@ -137,37 +122,33 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   String get selectedTipoError {
-    _$selectedTipoErrorAtom.context.enforceReadPolicy(_$selectedTipoErrorAtom);
-    _$selectedTipoErrorAtom.reportObserved();
+    _$selectedTipoErrorAtom.reportRead();
     return super.selectedTipoError;
   }
 
   @override
   set selectedTipoError(String value) {
-    _$selectedTipoErrorAtom.context.conditionallyRunInAction(() {
+    _$selectedTipoErrorAtom.reportWrite(value, super.selectedTipoError, () {
       super.selectedTipoError = value;
-      _$selectedTipoErrorAtom.reportChanged();
-    }, _$selectedTipoErrorAtom, name: '${_$selectedTipoErrorAtom.name}_set');
+    });
   }
 
   final _$updatedProdutoAtom = Atom(name: '_UpdateProdutoBase.updatedProduto');
 
   @override
   ProdutoTipoCategoriaProdutoDto get updatedProduto {
-    _$updatedProdutoAtom.context.enforceReadPolicy(_$updatedProdutoAtom);
-    _$updatedProdutoAtom.reportObserved();
+    _$updatedProdutoAtom.reportRead();
     return super.updatedProduto;
   }
 
   @override
   set updatedProduto(ProdutoTipoCategoriaProdutoDto value) {
-    _$updatedProdutoAtom.context.conditionallyRunInAction(() {
+    _$updatedProdutoAtom.reportWrite(value, super.updatedProduto, () {
       super.updatedProduto = value;
-      _$updatedProdutoAtom.reportChanged();
-    }, _$updatedProdutoAtom, name: '${_$updatedProdutoAtom.name}_set');
+    });
   }
 
-  final _$salvarAsyncAction = AsyncAction('salvar');
+  final _$salvarAsyncAction = AsyncAction('_UpdateProdutoBase.salvar');
 
   @override
   Future<bool> salvar() {
@@ -178,8 +159,9 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
       ActionController(name: '_UpdateProdutoBase');
 
   @override
-  dynamic setDescricao(String _desc) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction();
+  void setDescricao(String _desc) {
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
+        name: '_UpdateProdutoBase.setDescricao');
     try {
       return super.setDescricao(_desc);
     } finally {
@@ -188,8 +170,9 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
   }
 
   @override
-  dynamic setValor(String _valor) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction();
+  void setValor(String _valor) {
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
+        name: '_UpdateProdutoBase.setValor');
     try {
       return super.setValor(_valor);
     } finally {
@@ -198,8 +181,9 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
   }
 
   @override
-  dynamic setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction();
+  void setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
+        name: '_UpdateProdutoBase.setSelectedCategoria');
     try {
       return super.setSelectedCategoria(_selectedCategoria);
     } finally {
@@ -208,12 +192,28 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
   }
 
   @override
-  dynamic setSelectedTipo(TipoECategoriaDto _selectedTipo) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction();
+  void setSelectedTipo(TipoECategoriaDto _selectedTipo) {
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
+        name: '_UpdateProdutoBase.setSelectedTipo');
     try {
       return super.setSelectedTipo(_selectedTipo);
     } finally {
       _$_UpdateProdutoBaseActionController.endAction(_$actionInfo);
     }
+  }
+
+  @override
+  String toString() {
+    return '''
+descricao: ${descricao},
+valor: ${valor},
+selectedCategoria: ${selectedCategoria},
+selectedTipo: ${selectedTipo},
+descricaoError: ${descricaoError},
+valorError: ${valorError},
+selectedCategoriaError: ${selectedCategoriaError},
+selectedTipoError: ${selectedTipoError},
+updatedProduto: ${updatedProduto}
+    ''';
   }
 }

@@ -17,15 +17,15 @@ environment:
   sdk: ">=2.3.0 <3.0.0"
 
 dependencies:  
-  oktoast: ^2.3.0
-  firebase_auth: ^0.15.3+1
-  find_dropdown: 
-    git: https://github.com/Bwolfs2/find_dropdown.git
-  hasura_connect: ^1.1.2
-  dio: ^3.0.8
-  flutter_mobx: ^0.3.6
-  mobx: ^0.4.0+1
-  flutter_modular: ^1.1.1
+  oktoast: ^2.3.2
+  firebase_auth: ^0.16.1
+  find_dropdown: ^0.2.0
+  git: ^1.0.1
+  hasura_connect: 2.0.0-dev.17.3
+  dio: ^3.0.10
+  flutter_mobx: ^1.1.0+2
+  mobx: ^1.2.1+2
+  flutter_modular: ^1.3.2
   flutter:
     sdk: flutter
 
@@ -33,10 +33,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
 dev_dependencies:
-  effective_dart: ^1.2.1
+  effective_dart: ^1.2.4
   mockito: ^4.1.1
-  mobx_codegen: ^0.4.0+1
-  build_runner: ^1.7.3
+  build_runner: ^1.10.0
+  mobx_codegen: ^1.1.0+1
   flutter_test:
     sdk: flutter
 

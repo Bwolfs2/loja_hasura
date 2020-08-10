@@ -8,7 +8,7 @@ class HomeRepository extends Disposable {
 
   HomeRepository(this._hasuraConnect);
 
-  Stream<List<ProdutoModel>> getProduto() {
+  Future<Snapshot<List<ProdutoModel>>> getProduto() async {
     var query = '''
               subscription getProdutos {
                 produto {
@@ -24,10 +24,14 @@ class HomeRepository extends Disposable {
                 }
               }''';
 
-    var snapshot = _hasuraConnect.subscription(query);
+    var snapshot = await _hasuraConnect.subscription(query);
 
-    return snapshot
-        .map((data) => ProdutoModel.fromJsonList(data["data"]["produto"]));
+    return snapshot.map((data) {
+      if (data == null) {
+        return null;
+      }
+      return ProdutoModel.fromJsonList(data["data"]["produto"]);
+    });
   }
 
   //dispose will be called automatically

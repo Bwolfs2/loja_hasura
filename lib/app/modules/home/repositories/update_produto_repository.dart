@@ -73,7 +73,7 @@ class UpdateProdutoRepository extends Disposable {
       });
 
       return snapshot["data"]["update_produto"]["affected_rows"] > 0;
-    } on Exception {
+    } on Exception catch (e) {
       return false;
     }
   }

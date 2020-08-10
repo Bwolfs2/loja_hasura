@@ -4,20 +4,50 @@ import 'package:hasura_connect/hasura_connect.dart';
 
 class CustomHasuraConnect {
   static HasuraConnect getConnect(FirebaseAuth auth) {
-    return HasuraConnect(
-      "https://loja-hasura.herokuapp.com/v1/graphql",
-      token: (_) async {
-        var user = await auth.currentUser();
-
-        var token = await user.getIdToken(refresh: true);
-
-        if (token != null) {
-          return "Bearer ${token.token}";
-        } else {
-          Modular.to.pushReplacementNamed("/login");
-          return null;
-        }
-      },
-    );
+    return HasuraConnect("https://loja-hasura.herokuapp.com/v1/graphql",
+        interceptors: [TokenInterceptor(auth), LogInterceptor()], headers: {});
   }
+}
+
+class TokenInterceptor extends Interceptor {
+  final FirebaseAuth auth;
+  TokenInterceptor(this.auth);
+
+  @override
+  Future<void> onConnected(HasuraConnect connect) {}
+
+  @override
+  Future<void> onDisconnected() {}
+
+  @override
+  Future onError(HasuraError request) async {
+    return request;
+  }
+
+  @override
+  Future<Request> onRequest(Request request) async {
+    var user = await auth.currentUser();
+    var token = await user.getIdToken(refresh: true);
+    if (token != null) {
+      try {
+        request.headers["Authorization"] = "Bearer ${token.token}";
+        return request;
+      } catch (e) {
+        return null;
+      }
+    } else {
+      Modular.to.pushReplacementNamed("/login");
+    }
+  }
+
+  @override
+  Future onResponse(Response data) async {
+    return data;
+  }
+
+  @override
+  Future<void> onSubscription(Request request, Snapshot snapshot) {}
+
+  @override
+  Future<void> onTryAgain(HasuraConnect connect) {}
 }

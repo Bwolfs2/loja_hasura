@@ -100,6 +100,7 @@ abstract class _UpdateProdutoBase with Store {
 
   @action
   Future<bool> salvar() async {
+    isValid = true;
     _validDescricao();
     _validValor();
 

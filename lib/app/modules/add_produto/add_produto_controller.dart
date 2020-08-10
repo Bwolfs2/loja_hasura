@@ -87,6 +87,7 @@ abstract class _AddProdutoBase with Store {
 
   @action
   Future<bool> salvar() async {
+    bool isValid = true;
     _validDescricao();
     _validValor();
 

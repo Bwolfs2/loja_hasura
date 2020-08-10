@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 
 import '../../../app/modules/home/home_controller.dart';
 import '../../../app/modules/home/home_module.dart';
@@ -15,9 +16,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  HomeController homeController = HomeModule.to.get();
-
+class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -31,6 +30,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
+                // Modular.get<HasuraConnect>().disconnect();
                 Modular.to.pushReplacementNamed("/auth");
               },
             )
@@ -38,32 +38,31 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Observer(
           builder: (context) {
-            if (homeController.listaProdutos.hasError) {
+            if (controller.listaProdutos?.hasError ?? false) {
               return Center(
                 child: Text("Ocorreu um erro ao realizar essa requisição."),
               );
             }
 
-            if (homeController.listaProdutos.value == null) {
+            if (controller.listaProdutos?.value == null) {
               return Center(child: CircularProgressIndicator());
             }
 
-            homeController.listaProdutos.value.sort((produto1, produto2) =>
-                produto1.nome
-                    .toLowerCase()
-                    .compareTo(produto2.nome.toLowerCase()));
+            controller.listaProdutos.value.sort((produto1, produto2) => produto1
+                .nome
+                .toLowerCase()
+                .compareTo(produto2.nome.toLowerCase()));
             return ListView.builder(
-              itemCount: homeController.listaProdutos.value.length,
+              itemCount: controller.listaProdutos.value.length,
               itemBuilder: (context, index) {
                 return CardProdutoWidget(
-                  nomeProduto: homeController.listaProdutos.value[index].nome,
-                  valor: homeController.listaProdutos.value[index].valor
-                      .toString(),
-                  categoriaProduto: homeController
+                  nomeProduto: controller.listaProdutos.value[index].nome,
+                  valor: controller.listaProdutos.value[index].valor.toString(),
+                  categoriaProduto: controller
                       .listaProdutos.value[index].categoriaProduto.descricao,
-                  tipoProduto: homeController
+                  tipoProduto: controller
                       .listaProdutos.value[index].tipoProduto.descricao,
-                  idProduto: homeController.listaProdutos.value[index].id,
+                  idProduto: controller.listaProdutos.value[index].id,
                 );
               },
             );
