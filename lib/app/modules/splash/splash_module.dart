@@ -11,8 +11,8 @@ class SplashModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router('/', child: (_, args) => SplashPage()),
+  List<ModularRouter> get routers => [
+        ModularRouter('/', child: (_, args) => SplashPage()),
       ];
 
   static Inject get to => Inject<SplashModule>.of();

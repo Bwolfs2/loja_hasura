@@ -17,8 +17,8 @@ class AddProdutoModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router('/', child: (_, args) => AddProdutoPage()),
+  List<ModularRouter> get routers => [
+        ModularRouter('/', child: (_, args) => AddProdutoPage()),
       ];
 
   static Inject get to => Inject<AddProdutoModule>.of();

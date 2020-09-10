@@ -28,9 +28,9 @@ class HomeModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router('/', child: (_, args) => HomePage()),
-        Router('/UpdateProduto/:id',
+  List<ModularRouter> get routers => [
+        ModularRouter('/', child: (_, args) => HomePage()),
+        ModularRouter('/UpdateProduto/:id',
             child: (_, args) => UpdateProdutoPage(
                   id: args.params['id'],
                 )),

@@ -39,6 +39,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         body: Observer(
           builder: (context) {
             if (controller.listaProdutos?.hasError ?? false) {
+              print(controller.listaProdutos.error);
               return Center(
                 child: Text("Ocorreu um erro ao realizar essa requisição."),
               );
