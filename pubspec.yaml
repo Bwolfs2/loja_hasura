@@ -21,7 +21,9 @@ dependencies:
   firebase_auth: ^0.16.1
   find_dropdown: ^0.2.0
   git: ^1.0.1
-  hasura_connect: 2.0.0-dev.17.5
+  hasura_cache_interceptor: 1.0.0-dev.4
+  hive_cache_interceptor: 1.0.0-dev.2
+  hasura_connect: 2.0.0-dev.17.8
   dio: ^3.0.10
   flutter_mobx: ^1.1.0+2
   mobx: ^1.2.1+2

@@ -43,8 +43,12 @@ class ProdutoModel {
         id: json["id"],
         nome: json["nome"],
         valor: json["valor"].toDouble(),
-        tipoProduto: TipoOuCategoriaDto.fromMap(json["tipo_produto"]),
-        categoriaProduto: TipoOuCategoriaDto.fromMap(json["categoria_produto"]),
+        tipoProduto: TipoOuCategoriaDto.fromMap(
+          json["tipo_produto"]?.cast<String, dynamic>(),
+        ),
+        categoriaProduto: TipoOuCategoriaDto.fromMap(
+          json["categoria_produto"]?.cast<String, dynamic>(),
+        ),
       );
 
   Map<String, dynamic> toMap() => {
@@ -58,6 +62,7 @@ class ProdutoModel {
   static List<ProdutoModel> fromJsonList(List list) {
     if (list == null) return null;
     return list
+        .map((item) => item.cast<String, dynamic>())
         .map<ProdutoModel>((item) => ProdutoModel.fromMap(item))
         .toList();
   }

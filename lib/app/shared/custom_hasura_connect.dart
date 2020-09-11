@@ -1,11 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:hive_cache_interceptor/hive_cache_interceptor.dart';
 
 class CustomHasuraConnect {
   static HasuraConnect getConnect(FirebaseAuth auth) {
-    return HasuraConnect("https://loja-hasura.herokuapp.com/v1/graphql",
-        interceptors: [TokenInterceptor(auth), LogInterceptor()], headers: {});
+    return HasuraConnect(
+      "https://loja-hasura.herokuapp.com/v1/graphql",
+      interceptors: [
+        TokenInterceptor(auth),
+        LogInterceptor(),
+        HiveCacheInterceptor(),
+      ],
+      headers: {},
+    );
   }
 }
 
