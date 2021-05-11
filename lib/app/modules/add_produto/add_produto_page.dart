@@ -199,9 +199,9 @@ class _AddProdutoPageState extends State<AddProdutoPage> {
                         } else {
                           showDialog(
                               context: context,
-                              child: AlertDialog(
+                              builder: (BuildContext context )=> AlertDialog(
                                 content:
-                                    Text("Erro ao tentar salvar o produto!"),
+                                Text("Erro ao tentar salvar o produto!"),
                                 actions: <Widget>[
                                   FlatButton(
                                     child: Text("Fechar"),

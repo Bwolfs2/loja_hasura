@@ -147,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         } else {
                           showDialog(
                               context: context,
-                              child: AlertDialog(
+                              builder: (BuildContext context) => AlertDialog(
                                 content: Text(
                                     "Erro ao tentar efetuar o login! Tente novamente!"),
                                 actions: <Widget>[

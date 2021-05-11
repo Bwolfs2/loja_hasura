@@ -84,7 +84,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
         await showDialog(
             context: context,
-            child: AlertDialog(
+            builder: (BuildContext context)=>AlertDialog(
               content: Text("Voce deseja mesmo sair?"),
               actions: <Widget>[
                 FlatButton(
