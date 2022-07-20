@@ -12,9 +12,9 @@ abstract class _AuthBase with Store {
   String senha = "";
 
   @observable
-  String emailError;
+  String? emailError;
   @observable
-  String senhaError;
+  String? senhaError;
 
   @action
   void setEmail(String _email) => email = _email;
@@ -29,14 +29,14 @@ abstract class _AuthBase with Store {
 
     var valid = true;
 
-    if (email == null || !email.contains("@")) {
+    if (!email.contains("@")) {
       emailError = "Email invalido !!!";
       valid = false;
     } else {
       emailError = null;
     }
 
-    if (senha == null || senha.length == 0) {
+    if (senha.isEmpty) {
       senhaError = "Senha invalida !!!";
       valid = false;
     } else {
@@ -54,7 +54,7 @@ abstract class _AuthBase with Store {
     ))
         .user;
 
-    var tokenId = await user.getIdToken();
+    var tokenId = await user?.getIdToken();
     valid = tokenId != null;
 
     return valid;

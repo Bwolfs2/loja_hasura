@@ -15,9 +15,9 @@ abstract class _RegisterBase with Store {
   String confirmacaoSenha = "";
 
   @observable
-  String emailError;
+  String? emailError;
   @observable
-  String senhaError;
+  String? senhaError;
 
   @action
   void setEmail(String _email) => email = _email;
@@ -25,8 +25,7 @@ abstract class _RegisterBase with Store {
   @action
   void setSenha(String _senha) => senha = _senha;
   @action
-  void setConfirmacaoSenha(String _confirmacaoSenha) =>
-      confirmacaoSenha = _confirmacaoSenha;
+  void setConfirmacaoSenha(String _confirmacaoSenha) => confirmacaoSenha = _confirmacaoSenha;
 
   @action
   Future<bool> criarConta() async {
@@ -35,14 +34,14 @@ abstract class _RegisterBase with Store {
 
     var valid = true;
 
-    if (email == null || !email.contains("@")) {
+    if (!email.contains("@")) {
       emailError = "Email invalido !!!";
       valid = false;
     } else {
       emailError = null;
     }
 
-    if (senha == null || senha.length == 0) {
+    if (senha.isEmpty) {
       senhaError = "Senha invalida !!!";
       valid = false;
     } else {
@@ -65,7 +64,7 @@ abstract class _RegisterBase with Store {
     ))
         .user;
 
-    var tokenId = await user.getIdToken();
+    var tokenId = await user?.getIdToken();
     valid = tokenId != null;
 
     return valid;

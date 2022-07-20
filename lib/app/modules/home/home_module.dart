@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
-import '../../../app/app_module.dart';
 import '../../../app/modules/home/home_controller.dart';
 import '../../../app/modules/home/home_page.dart';
 import '../../../app/modules/home/pages/update_produto/update_produto_controller.dart';
@@ -10,31 +9,28 @@ import '../../../app/modules/home/repositories/home_repository.dart';
 import '../../../app/modules/home/repositories/update_produto_repository.dart';
 import '../../../app/modules/home/widgets/card_produto/card_produto_controller.dart';
 
-class HomeModule extends ChildModule {
+class HomeModule extends Module {
   @override
-  List<Bind> get binds => [
-        //Controllers
-        Bind((i) => CardProdutoController()),
-        Bind((i) => HomeController(i.get<HomeRepository>())),
+  final List<Bind> binds = [
+    //Controllers
+    Bind((i) => CardProdutoController()),
+    Bind((i) => HomeController(i.get<HomeRepository>())),
 
-        Bind(
-            (i) => UpdateProdutoController(
-                i.get<UpdateProdutoRepository>(), i.params["id"]),
-            singleton: false),
+    Bind((i) => UpdateProdutoController(i.get<UpdateProdutoRepository>())),
 
-        //Repositories
-        Bind((i) => UpdateProdutoRepository(AppModule.to.get<HasuraConnect>())),
-        Bind((i) => HomeRepository(AppModule.to.get<HasuraConnect>())),
-      ];
+    //Repositories
+    Bind((i) => UpdateProdutoRepository(i.get<HasuraConnect>())),
+    Bind((i) => HomeRepository(i.get<HasuraConnect>())),
+  ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter('/', child: (_, args) => HomePage()),
-        ModularRouter('/UpdateProduto/:id',
-            child: (_, args) => UpdateProdutoPage(
-                  id: args.params['id'],
-                )),
-      ];
-
-  static Inject get to => Inject<HomeModule>.of();
+  final List<ModularRoute> routes = [
+    ChildRoute('/', child: (_, args) => HomePage()),
+    ChildRoute(
+      '/UpdateProduto/:id',
+      child: (_, args) => UpdateProdutoPage(
+        id: args.params['id'],
+      ),
+    ),
+  ];
 }

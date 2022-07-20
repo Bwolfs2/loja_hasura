@@ -1,7 +1,4 @@
 {
-    "cSpell.words": [
-        "connect",
-        "hasura",
-        "hasura connect"
-    ]
+  "cSpell.words": ["connect", "hasura", "hasura connect"],
+  "dart.flutterSdkPath": "D:\\fvm\\images\\versions\\stable"
 }

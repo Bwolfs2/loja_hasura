@@ -6,26 +6,23 @@ import '../../../../../app/shared/widgets/label/label_widget.dart';
 import '../../../../modules/add_produto/models/tipo_categoria_produto_dto.dart';
 import '../../../../modules/home/pages/update_produto/update_produto_controller.dart';
 import '../../../../shared/custom_combobox/custom_combobox_widget.dart';
-import '../../home_module.dart';
 
 class UpdateProdutoPage extends StatefulWidget {
   final String id;
   final String title;
-  UpdateProdutoPage({Key key, this.title = "UpdateProduto", @required this.id})
-      : super(key: key);
+  UpdateProdutoPage({Key? key, this.title = "UpdateProduto", required this.id}) : super(key: key);
 
   @override
-  _UpdateProdutoPageState createState() => _UpdateProdutoPageState(id);
+  _UpdateProdutoPageState createState() => _UpdateProdutoPageState();
 }
 
 class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
-  final String id;
-  _UpdateProdutoPageState(this.id);
-  UpdateProdutoController controller;
+  _UpdateProdutoPageState();
+  late final UpdateProdutoController controller;
   @override
   void initState() {
-    controller = HomeModule.to.get<UpdateProdutoController>(params: {"id": id});
     super.initState();
+    controller = Modular.get<UpdateProdutoController>()..init(widget.id);
   }
 
   @override
@@ -79,21 +76,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                         onChanged: controller.setDescricao,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                         controller: controller.descricaoController,
-                        decoration: InputDecoration(
-                            hintText: "Descricao do Produto",
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2)),
-                            errorText: controller.descricaoError),
+                        decoration: InputDecoration(hintText: "Descricao do Produto", border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), errorText: controller.descricaoError),
                       );
                     },
                   ),
@@ -111,20 +94,12 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                         keyboardType: TextInputType.number,
                         style: TextStyle(color: Theme.of(context).primaryColor),
                         decoration: InputDecoration(
-                            hintText: "Valor",
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2)),
-                            errorText: controller.valorError),
+                          hintText: "Valor",
+                          border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                          errorText: controller.valorError,
+                        ),
                       );
                     },
                   ),
@@ -138,11 +113,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     builder: (context) {
                       if (controller.updatedProduto == null) {
                         return Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                    width: 2,
-                                    color: Theme.of(context).primaryColor)),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), border: Border.all(width: 2, color: Theme.of(context).primaryColor)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
@@ -155,17 +126,16 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                       }
 
                       return CustomComboboxWidget(
-                          items: controller.updatedProduto.categoriaProduto
-                              .map((data) => Model(data.id, data.descricao))
-                              .toList(),
-                          onChange: (tipo) => controller.setSelectedCategoria(
-                              TipoECategoriaDto(
-                                  id: tipo.id, descricao: tipo.descricao)),
-                          itemSelecionado: controller.selectedCategoria == null
-                              ? controller.selectedCategoria
-                              : Model(controller.selectedCategoria.id,
-                                  controller.selectedCategoria.descricao),
-                          errorText: controller.selectedCategoriaError);
+                        items: controller.updatedProduto?.categoriaProduto.map((data) => Model(data.id, data.descricao)).toList() ?? [],
+                        onChange: (tipo) => controller.setSelectedCategoria(TipoECategoriaDto(id: tipo.id, descricao: tipo.descricao)),
+                        itemSelecionado: controller.selectedCategoria == null
+                            ? null
+                            : Model(
+                                controller.selectedCategoria?.id ?? '',
+                                controller.selectedCategoria?.descricao ?? '',
+                              ),
+                        errorText: controller.selectedCategoriaError,
+                      );
                     },
                   ),
                   LabelWidget(
@@ -175,11 +145,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     builder: (context) {
                       if (controller.updatedProduto == null) {
                         return Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                    width: 2,
-                                    color: Theme.of(context).primaryColor)),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), border: Border.all(width: 2, color: Theme.of(context).primaryColor)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
@@ -191,17 +157,11 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                             ));
                       }
                       return CustomComboboxWidget(
-                          items: controller.updatedProduto.tipoProduto
-                              .map((data) => Model(data.id, data.descricao))
-                              .toList(),
-                          onChange: (tipo) => controller.setSelectedTipo(
-                              TipoECategoriaDto(
-                                  id: tipo.id, descricao: tipo.descricao)),
-                          itemSelecionado: controller.selectedTipo == null
-                              ? null
-                              : Model(controller.selectedTipo.id,
-                                  controller.selectedTipo.descricao),
-                          errorText: controller.selectedTipoError);
+                        items: controller.updatedProduto?.tipoProduto.map((data) => Model(data.id, data.descricao)).toList() ?? [],
+                        onChange: (tipo) => controller.setSelectedTipo(TipoECategoriaDto(id: tipo.id, descricao: tipo.descricao)),
+                        itemSelecionado: controller.selectedTipo == null ? null : Model(controller.selectedTipo?.id ?? '', controller.selectedTipo?.descricao ?? ''),
+                        errorText: controller.selectedTipoError,
+                      );
                     },
                   ),
                   SizedBox(
@@ -209,8 +169,8 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    child: RaisedButton(
-                      color: Theme.of(context).primaryColor,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
                       onPressed: () async {
                         var result = await controller.salvar();
 
@@ -218,29 +178,25 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                           Modular.to.pop();
                         } else {
                           showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                content:
-                                    Text("Erro ao tentar salvar o produto!"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text("Fechar"),
-                                    onPressed: () {
-                                      Modular.to.pop();
-                                    },
-                                  )
-                                ],
-                              ));
+                              builder: (context) => AlertDialog(
+                                    content: Text("Erro ao tentar salvar o produto!"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text("Fechar"),
+                                        onPressed: () {
+                                          Modular.to.pop();
+                                        },
+                                      )
+                                    ],
+                                  ),
+                              context: context);
                         }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           "Salvar",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

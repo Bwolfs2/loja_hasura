@@ -11,7 +11,7 @@ abstract class _SplashBase with Store {
   _SplashBase(this.firebaseAuth);
 
   Future<bool> checkLogin() async {
-    var user = await firebaseAuth.currentUser();
+    var user = await firebaseAuth.currentUser;
     return user != null;
   }
 }

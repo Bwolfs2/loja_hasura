@@ -12,15 +12,15 @@ class ProdutoTipoCategoriaProdutoDto {
   final Produto produto;
 
   ProdutoTipoCategoriaProdutoDto({
-    this.tipoProduto,
-    this.categoriaProduto,
-    this.produto,
+    required this.tipoProduto,
+    required this.categoriaProduto,
+    required this.produto,
   });
 
   ProdutoTipoCategoriaProdutoDto copyWith({
-    List<TipoECategoriaDto> tipoProduto,
-    List<TipoECategoriaDto> categoriaProduto,
-    Produto produto,
+    List<TipoECategoriaDto>? tipoProduto,
+    List<TipoECategoriaDto>? categoriaProduto,
+    Produto? produto,
   }) =>
       ProdutoTipoCategoriaProdutoDto(
         tipoProduto: tipoProduto ?? this.tipoProduto,
@@ -28,24 +28,19 @@ class ProdutoTipoCategoriaProdutoDto {
         produto: produto ?? this.produto,
       );
 
-  factory ProdutoTipoCategoriaProdutoDto.fromJson(String str) =>
-      ProdutoTipoCategoriaProdutoDto.fromMap(json.decode(str));
+  factory ProdutoTipoCategoriaProdutoDto.fromJson(String str) => ProdutoTipoCategoriaProdutoDto.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory ProdutoTipoCategoriaProdutoDto.fromMap(Map<String, dynamic> json) =>
-      ProdutoTipoCategoriaProdutoDto(
-        tipoProduto: List<TipoECategoriaDto>.from(
-            json["tipo_produto"].map((x) => TipoECategoriaDto.fromMap(x))),
-        categoriaProduto: List<TipoECategoriaDto>.from(
-            json["categoria_produto"].map((x) => TipoECategoriaDto.fromMap(x))),
+  factory ProdutoTipoCategoriaProdutoDto.fromMap(Map<String, dynamic> json) => ProdutoTipoCategoriaProdutoDto(
+        tipoProduto: List<TipoECategoriaDto>.from(json["tipo_produto"].map(TipoECategoriaDto.fromMap)),
+        categoriaProduto: List<TipoECategoriaDto>.from(json["categoria_produto"].map(TipoECategoriaDto.fromMap)),
         produto: Produto.fromMap(json["produto_by_pk"]),
       );
 
   Map<String, dynamic> toMap() => {
         "tipo_produto": List<dynamic>.from(tipoProduto.map((x) => x.toMap())),
-        "categoria_produto":
-            List<dynamic>.from(categoriaProduto.map((x) => x.toMap())),
+        "categoria_produto": List<dynamic>.from(categoriaProduto.map((x) => x.toMap())),
         "produto_by_pk": produto.toMap(),
       };
 }
@@ -58,21 +53,22 @@ class Produto {
   final TipoECategoriaDto tipoProduto;
   final double valor;
 
-  Produto(
-      {this.id,
-      this.nome,
-      this.tipoProdutoId,
-      this.categoriaProduto,
-      this.tipoProduto,
-      this.valor});
+  Produto({
+    required this.id,
+    required this.nome,
+    required this.tipoProdutoId,
+    required this.categoriaProduto,
+    required this.tipoProduto,
+    required this.valor,
+  });
 
   Produto copyWith({
-    String id,
-    String nome,
-    String tipoProdutoId,
-    TipoECategoriaDto categoriaProduto,
-    TipoECategoriaDto tipoProduto,
-    double valor,
+    String? id,
+    String? nome,
+    String? tipoProdutoId,
+    TipoECategoriaDto? categoriaProduto,
+    TipoECategoriaDto? tipoProduto,
+    double? valor,
   }) =>
       Produto(
         id: id ?? this.id,
