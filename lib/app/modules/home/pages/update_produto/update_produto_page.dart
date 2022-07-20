@@ -172,7 +172,7 @@ class _UpdateProdutoPageState extends State<UpdateProdutoPage> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
                       onPressed: () async {
-                        var result = await controller.salvar();
+                        var result = await controller.salvar(widget.id);
 
                         if (result) {
                           Modular.to.pop();

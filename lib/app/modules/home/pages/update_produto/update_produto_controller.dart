@@ -11,11 +11,10 @@ class UpdateProdutoController = _UpdateProdutoBase with _$UpdateProdutoControlle
 
 abstract class _UpdateProdutoBase with Store {
   final UpdateProdutoRepository updateProdutoRepository;
-  late final String idProduto;
   _UpdateProdutoBase(this.updateProdutoRepository);
 
   void init(String _idProduto) {
-    updateProdutoRepository.getProdutoTipoCategoriaProduto(idProduto).then((data) {
+    updateProdutoRepository.getProdutoTipoCategoriaProduto(_idProduto).then((data) {
       updatedProduto = data;
       valor = updatedProduto?.produto.valor.toString() ?? '';
       descricao = updatedProduto?.produto.nome ?? '';
@@ -98,7 +97,7 @@ abstract class _UpdateProdutoBase with Store {
   }
 
   @action
-  Future<bool> salvar() async {
+  Future<bool> salvar(String idProduto) async {
     isValid = true;
     _validDescricao();
     _validValor();

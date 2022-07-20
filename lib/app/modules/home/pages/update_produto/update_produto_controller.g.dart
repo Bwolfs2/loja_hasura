@@ -9,8 +9,7 @@ part of 'update_produto_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
-  late final _$descricaoAtom =
-      Atom(name: '_UpdateProdutoBase.descricao', context: context);
+  late final _$descricaoAtom = Atom(name: '_UpdateProdutoBase.descricao', context: context);
 
   @override
   String get descricao {
@@ -25,8 +24,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$valorAtom =
-      Atom(name: '_UpdateProdutoBase.valor', context: context);
+  late final _$valorAtom = Atom(name: '_UpdateProdutoBase.valor', context: context);
 
   @override
   String get valor {
@@ -41,8 +39,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$selectedCategoriaAtom =
-      Atom(name: '_UpdateProdutoBase.selectedCategoria', context: context);
+  late final _$selectedCategoriaAtom = Atom(name: '_UpdateProdutoBase.selectedCategoria', context: context);
 
   @override
   TipoECategoriaDto? get selectedCategoria {
@@ -57,8 +54,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$selectedTipoAtom =
-      Atom(name: '_UpdateProdutoBase.selectedTipo', context: context);
+  late final _$selectedTipoAtom = Atom(name: '_UpdateProdutoBase.selectedTipo', context: context);
 
   @override
   TipoECategoriaDto? get selectedTipo {
@@ -73,8 +69,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$descricaoErrorAtom =
-      Atom(name: '_UpdateProdutoBase.descricaoError', context: context);
+  late final _$descricaoErrorAtom = Atom(name: '_UpdateProdutoBase.descricaoError', context: context);
 
   @override
   String? get descricaoError {
@@ -89,8 +84,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$valorErrorAtom =
-      Atom(name: '_UpdateProdutoBase.valorError', context: context);
+  late final _$valorErrorAtom = Atom(name: '_UpdateProdutoBase.valorError', context: context);
 
   @override
   String? get valorError {
@@ -105,8 +99,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$selectedCategoriaErrorAtom =
-      Atom(name: '_UpdateProdutoBase.selectedCategoriaError', context: context);
+  late final _$selectedCategoriaErrorAtom = Atom(name: '_UpdateProdutoBase.selectedCategoriaError', context: context);
 
   @override
   String? get selectedCategoriaError {
@@ -116,14 +109,12 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   set selectedCategoriaError(String? value) {
-    _$selectedCategoriaErrorAtom
-        .reportWrite(value, super.selectedCategoriaError, () {
+    _$selectedCategoriaErrorAtom.reportWrite(value, super.selectedCategoriaError, () {
       super.selectedCategoriaError = value;
     });
   }
 
-  late final _$selectedTipoErrorAtom =
-      Atom(name: '_UpdateProdutoBase.selectedTipoError', context: context);
+  late final _$selectedTipoErrorAtom = Atom(name: '_UpdateProdutoBase.selectedTipoError', context: context);
 
   @override
   String? get selectedTipoError {
@@ -138,8 +129,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$updatedProdutoAtom =
-      Atom(name: '_UpdateProdutoBase.updatedProduto', context: context);
+  late final _$updatedProdutoAtom = Atom(name: '_UpdateProdutoBase.updatedProduto', context: context);
 
   @override
   ProdutoTipoCategoriaProdutoDto? get updatedProduto {
@@ -154,21 +144,18 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
     });
   }
 
-  late final _$salvarAsyncAction =
-      AsyncAction('_UpdateProdutoBase.salvar', context: context);
+  late final _$salvarAsyncAction = AsyncAction('_UpdateProdutoBase.salvar', context: context);
 
   @override
-  Future<bool> salvar() {
-    return _$salvarAsyncAction.run(() => super.salvar());
+  Future<bool> salvar(String idProduct) {
+    return _$salvarAsyncAction.run(() => super.salvar(idProduct));
   }
 
-  late final _$_UpdateProdutoBaseActionController =
-      ActionController(name: '_UpdateProdutoBase', context: context);
+  late final _$_UpdateProdutoBaseActionController = ActionController(name: '_UpdateProdutoBase', context: context);
 
   @override
   void setDescricao(String _desc) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
-        name: '_UpdateProdutoBase.setDescricao');
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(name: '_UpdateProdutoBase.setDescricao');
     try {
       return super.setDescricao(_desc);
     } finally {
@@ -178,8 +165,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   void setValor(String _valor) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
-        name: '_UpdateProdutoBase.setValor');
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(name: '_UpdateProdutoBase.setValor');
     try {
       return super.setValor(_valor);
     } finally {
@@ -189,8 +175,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   void setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
-        name: '_UpdateProdutoBase.setSelectedCategoria');
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(name: '_UpdateProdutoBase.setSelectedCategoria');
     try {
       return super.setSelectedCategoria(_selectedCategoria);
     } finally {
@@ -200,8 +185,7 @@ mixin _$UpdateProdutoController on _UpdateProdutoBase, Store {
 
   @override
   void setSelectedTipo(TipoECategoriaDto _selectedTipo) {
-    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(
-        name: '_UpdateProdutoBase.setSelectedTipo');
+    final _$actionInfo = _$_UpdateProdutoBaseActionController.startAction(name: '_UpdateProdutoBase.setSelectedTipo');
     try {
       return super.setSelectedTipo(_selectedTipo);
     } finally {
