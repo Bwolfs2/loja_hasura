@@ -27,10 +27,7 @@ class HomeRepository extends Disposable {
     var snapshot = await _hasuraConnect.subscription(query);
 
     return snapshot.map((data) {
-      if (data == null) {
-        return null;
-      }
-      return ProdutoModel.fromJsonList(data["data"]["produto"]);
+      return ProdutoModel.fromJsonList(data["data"]["produto"]) ?? [];
     });
   }
 

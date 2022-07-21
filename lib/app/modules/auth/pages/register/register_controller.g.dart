@@ -6,10 +6,10 @@ part of 'register_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegisterController on _RegisterBase, Store {
-  final _$emailAtom = Atom(name: '_RegisterBase.email');
+  late final _$emailAtom = Atom(name: '_RegisterBase.email', context: context);
 
   @override
   String get email {
@@ -24,7 +24,7 @@ mixin _$RegisterController on _RegisterBase, Store {
     });
   }
 
-  final _$senhaAtom = Atom(name: '_RegisterBase.senha');
+  late final _$senhaAtom = Atom(name: '_RegisterBase.senha', context: context);
 
   @override
   String get senha {
@@ -39,7 +39,8 @@ mixin _$RegisterController on _RegisterBase, Store {
     });
   }
 
-  final _$confirmacaoSenhaAtom = Atom(name: '_RegisterBase.confirmacaoSenha');
+  late final _$confirmacaoSenhaAtom =
+      Atom(name: '_RegisterBase.confirmacaoSenha', context: context);
 
   @override
   String get confirmacaoSenha {
@@ -54,45 +55,48 @@ mixin _$RegisterController on _RegisterBase, Store {
     });
   }
 
-  final _$emailErrorAtom = Atom(name: '_RegisterBase.emailError');
+  late final _$emailErrorAtom =
+      Atom(name: '_RegisterBase.emailError', context: context);
 
   @override
-  String get emailError {
+  String? get emailError {
     _$emailErrorAtom.reportRead();
     return super.emailError;
   }
 
   @override
-  set emailError(String value) {
+  set emailError(String? value) {
     _$emailErrorAtom.reportWrite(value, super.emailError, () {
       super.emailError = value;
     });
   }
 
-  final _$senhaErrorAtom = Atom(name: '_RegisterBase.senhaError');
+  late final _$senhaErrorAtom =
+      Atom(name: '_RegisterBase.senhaError', context: context);
 
   @override
-  String get senhaError {
+  String? get senhaError {
     _$senhaErrorAtom.reportRead();
     return super.senhaError;
   }
 
   @override
-  set senhaError(String value) {
+  set senhaError(String? value) {
     _$senhaErrorAtom.reportWrite(value, super.senhaError, () {
       super.senhaError = value;
     });
   }
 
-  final _$criarContaAsyncAction = AsyncAction('_RegisterBase.criarConta');
+  late final _$criarContaAsyncAction =
+      AsyncAction('_RegisterBase.criarConta', context: context);
 
   @override
   Future<bool> criarConta() {
     return _$criarContaAsyncAction.run(() => super.criarConta());
   }
 
-  final _$_RegisterBaseActionController =
-      ActionController(name: '_RegisterBase');
+  late final _$_RegisterBaseActionController =
+      ActionController(name: '_RegisterBase', context: context);
 
   @override
   void setEmail(String _email) {

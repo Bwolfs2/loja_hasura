@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:hive_cache_interceptor/hive_cache_interceptor.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class CustomHasuraConnect {
   static HasuraConnect getConnect(FirebaseAuth auth) {
     return HasuraConnect(
@@ -17,28 +18,17 @@ class CustomHasuraConnect {
   }
 }
 
-class TokenInterceptor extends Interceptor {
+class TokenInterceptor extends InterceptorBase implements Interceptor {
   final FirebaseAuth auth;
   TokenInterceptor(this.auth);
 
   @override
-  Future<void> onConnected(HasuraConnect connect) {}
-
-  @override
-  Future<void> onDisconnected() {}
-
-  @override
-  Future onError(HasuraError request) async {
-    return request;
-  }
-
-  @override
-  Future<Request> onRequest(Request request) async {
-    var user = await auth.currentUser();
-    var token = await user.getIdToken(refresh: true);
+  Future? onRequest(Request request, HasuraConnect connect) async {
+    var user = await auth.currentUser;
+    var token = await user?.getIdToken(true);
     if (token != null) {
       try {
-        request.headers["Authorization"] = "Bearer ${token.token}";
+        request.headers["Authorization"] = "Bearer $token";
         return request;
       } catch (e) {
         return null;
@@ -46,16 +36,6 @@ class TokenInterceptor extends Interceptor {
     } else {
       Modular.to.pushReplacementNamed("/login");
     }
+    return super.onRequest(request, connect);
   }
-
-  @override
-  Future onResponse(Response data) async {
-    return data;
-  }
-
-  @override
-  Future<void> onSubscription(Request request, Snapshot snapshot) {}
-
-  @override
-  Future<void> onTryAgain(HasuraConnect connect) {}
 }

@@ -12,19 +12,19 @@ class ProdutoModel {
   final TipoOuCategoriaDto categoriaProduto;
 
   ProdutoModel({
-    this.id,
-    this.nome,
-    this.valor,
-    this.tipoProduto,
-    this.categoriaProduto,
+    required this.id,
+    required this.nome,
+    required this.valor,
+    required this.tipoProduto,
+    required this.categoriaProduto,
   });
 
   ProdutoModel copyWith({
-    String id,
-    String nome,
-    int valor,
-    TipoOuCategoriaDto tipoProduto,
-    TipoOuCategoriaDto categoriaProduto,
+    String? id,
+    String? nome,
+    double? valor,
+    TipoOuCategoriaDto? tipoProduto,
+    TipoOuCategoriaDto? categoriaProduto,
   }) =>
       ProdutoModel(
         id: id ?? this.id,
@@ -34,12 +34,11 @@ class ProdutoModel {
         categoriaProduto: categoriaProduto ?? this.categoriaProduto,
       );
 
-  factory ProdutoModel.fromJson(String str) =>
-      ProdutoModel.fromMap(json.decode(str));
+  static ProdutoModel fromJson(String str) => ProdutoModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory ProdutoModel.fromMap(Map<String, dynamic> json) => ProdutoModel(
+  static ProdutoModel fromMap(Map<String, dynamic> json) => ProdutoModel(
         id: json["id"],
         nome: json["nome"],
         valor: json["valor"].toDouble(),
@@ -59,12 +58,10 @@ class ProdutoModel {
         "categoria_produto": categoriaProduto.toMap(),
       };
 
-  static List<ProdutoModel> fromJsonList(List list) {
+  static List<ProdutoModel>? fromJsonList(List? list) {
     if (list == null) return null;
-    return list
-        .map((item) => item.cast<String, dynamic>())
-        .map<ProdutoModel>((item) => ProdutoModel.fromMap(item))
-        .toList();
+    // ignore: unnecessary_lambdas
+    return list.map((item) => item.cast<String, dynamic>()).map<ProdutoModel>((e) => ProdutoModel.fromMap(e)).toList();
   }
 }
 
@@ -72,23 +69,21 @@ class TipoOuCategoriaDto {
   final String descricao;
 
   TipoOuCategoriaDto({
-    this.descricao,
+    required this.descricao,
   });
 
   TipoOuCategoriaDto copyWith({
-    String descricao,
+    String? descricao,
   }) =>
       TipoOuCategoriaDto(
         descricao: descricao ?? this.descricao,
       );
 
-  factory TipoOuCategoriaDto.fromJson(String str) =>
-      TipoOuCategoriaDto.fromMap(json.decode(str));
+  factory TipoOuCategoriaDto.fromJson(String str) => TipoOuCategoriaDto.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory TipoOuCategoriaDto.fromMap(Map<String, dynamic> json) =>
-      TipoOuCategoriaDto(
+  factory TipoOuCategoriaDto.fromMap(Map<String, dynamic> json) => TipoOuCategoriaDto(
         descricao: json["descricao"],
       );
 

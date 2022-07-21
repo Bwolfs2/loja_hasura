@@ -6,10 +6,11 @@ part of 'add_produto_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AddProdutoController on _AddProdutoBase, Store {
-  final _$descricaoAtom = Atom(name: '_AddProdutoBase.descricao');
+  late final _$descricaoAtom =
+      Atom(name: '_AddProdutoBase.descricao', context: context);
 
   @override
   String get descricao {
@@ -24,7 +25,8 @@ mixin _$AddProdutoController on _AddProdutoBase, Store {
     });
   }
 
-  final _$valorAtom = Atom(name: '_AddProdutoBase.valor');
+  late final _$valorAtom =
+      Atom(name: '_AddProdutoBase.valor', context: context);
 
   @override
   String get valor {
@@ -39,124 +41,129 @@ mixin _$AddProdutoController on _AddProdutoBase, Store {
     });
   }
 
-  final _$descricaoErrorAtom = Atom(name: '_AddProdutoBase.descricaoError');
+  late final _$descricaoErrorAtom =
+      Atom(name: '_AddProdutoBase.descricaoError', context: context);
 
   @override
-  String get descricaoError {
+  String? get descricaoError {
     _$descricaoErrorAtom.reportRead();
     return super.descricaoError;
   }
 
   @override
-  set descricaoError(String value) {
+  set descricaoError(String? value) {
     _$descricaoErrorAtom.reportWrite(value, super.descricaoError, () {
       super.descricaoError = value;
     });
   }
 
-  final _$valorErrorAtom = Atom(name: '_AddProdutoBase.valorError');
+  late final _$valorErrorAtom =
+      Atom(name: '_AddProdutoBase.valorError', context: context);
 
   @override
-  String get valorError {
+  String? get valorError {
     _$valorErrorAtom.reportRead();
     return super.valorError;
   }
 
   @override
-  set valorError(String value) {
+  set valorError(String? value) {
     _$valorErrorAtom.reportWrite(value, super.valorError, () {
       super.valorError = value;
     });
   }
 
-  final _$selectedCategoriaErrorAtom =
-      Atom(name: '_AddProdutoBase.selectedCategoriaError');
+  late final _$selectedCategoriaErrorAtom =
+      Atom(name: '_AddProdutoBase.selectedCategoriaError', context: context);
 
   @override
-  String get selectedCategoriaError {
+  String? get selectedCategoriaError {
     _$selectedCategoriaErrorAtom.reportRead();
     return super.selectedCategoriaError;
   }
 
   @override
-  set selectedCategoriaError(String value) {
+  set selectedCategoriaError(String? value) {
     _$selectedCategoriaErrorAtom
         .reportWrite(value, super.selectedCategoriaError, () {
       super.selectedCategoriaError = value;
     });
   }
 
-  final _$selectedTipoErrorAtom =
-      Atom(name: '_AddProdutoBase.selectedTipoError');
+  late final _$selectedTipoErrorAtom =
+      Atom(name: '_AddProdutoBase.selectedTipoError', context: context);
 
   @override
-  String get selectedTipoError {
+  String? get selectedTipoError {
     _$selectedTipoErrorAtom.reportRead();
     return super.selectedTipoError;
   }
 
   @override
-  set selectedTipoError(String value) {
+  set selectedTipoError(String? value) {
     _$selectedTipoErrorAtom.reportWrite(value, super.selectedTipoError, () {
       super.selectedTipoError = value;
     });
   }
 
-  final _$selectedCategoriaAtom =
-      Atom(name: '_AddProdutoBase.selectedCategoria');
+  late final _$selectedCategoriaAtom =
+      Atom(name: '_AddProdutoBase.selectedCategoria', context: context);
 
   @override
-  TipoECategoriaDto get selectedCategoria {
+  TipoECategoriaDto? get selectedCategoria {
     _$selectedCategoriaAtom.reportRead();
     return super.selectedCategoria;
   }
 
   @override
-  set selectedCategoria(TipoECategoriaDto value) {
+  set selectedCategoria(TipoECategoriaDto? value) {
     _$selectedCategoriaAtom.reportWrite(value, super.selectedCategoria, () {
       super.selectedCategoria = value;
     });
   }
 
-  final _$selectedTipoAtom = Atom(name: '_AddProdutoBase.selectedTipo');
+  late final _$selectedTipoAtom =
+      Atom(name: '_AddProdutoBase.selectedTipo', context: context);
 
   @override
-  TipoECategoriaDto get selectedTipo {
+  TipoECategoriaDto? get selectedTipo {
     _$selectedTipoAtom.reportRead();
     return super.selectedTipo;
   }
 
   @override
-  set selectedTipo(TipoECategoriaDto value) {
+  set selectedTipo(TipoECategoriaDto? value) {
     _$selectedTipoAtom.reportWrite(value, super.selectedTipo, () {
       super.selectedTipo = value;
     });
   }
 
-  final _$tipoProdutoAtom = Atom(name: '_AddProdutoBase.tipoProduto');
+  late final _$tipoProdutoAtom =
+      Atom(name: '_AddProdutoBase.tipoProduto', context: context);
 
   @override
-  TipoCategoriaProdutoDto get tipoProduto {
+  TipoCategoriaProdutoDto? get tipoProduto {
     _$tipoProdutoAtom.reportRead();
     return super.tipoProduto;
   }
 
   @override
-  set tipoProduto(TipoCategoriaProdutoDto value) {
+  set tipoProduto(TipoCategoriaProdutoDto? value) {
     _$tipoProdutoAtom.reportWrite(value, super.tipoProduto, () {
       super.tipoProduto = value;
     });
   }
 
-  final _$salvarAsyncAction = AsyncAction('_AddProdutoBase.salvar');
+  late final _$salvarAsyncAction =
+      AsyncAction('_AddProdutoBase.salvar', context: context);
 
   @override
   Future<bool> salvar() {
     return _$salvarAsyncAction.run(() => super.salvar());
   }
 
-  final _$_AddProdutoBaseActionController =
-      ActionController(name: '_AddProdutoBase');
+  late final _$_AddProdutoBaseActionController =
+      ActionController(name: '_AddProdutoBase', context: context);
 
   @override
   void setDescricao(String _desc) {

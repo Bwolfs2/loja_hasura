@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../app/modules/splash/splash_controller.dart';
-import '../../../app/modules/splash/splash_module.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;
-  const SplashPage({Key key, this.title = "Splash"}) : super(key: key);
+  const SplashPage({Key? key, this.title = "Splash"}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final SplashController controller = SplashModule.to.get<SplashController>();
+  final SplashController controller = Modular.get<SplashController>();
   void checkLogin() async {
     var result = await controller.checkLogin();
 

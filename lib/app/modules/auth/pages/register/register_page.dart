@@ -3,19 +3,18 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../app/shared/widgets/label/label_widget.dart';
-import '../../auth_module.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends StatefulWidget {
   final String title;
-  const RegisterPage({Key key, this.title = "Register"}) : super(key: key);
+  const RegisterPage({Key? key, this.title = "Register"}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  var controller = AuthModule.to.get<RegisterController>();
+  var controller = Modular.get<RegisterController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,21 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       onChanged: controller.setEmail,
                       keyboardType: TextInputType.emailAddress,
                       style: TextStyle(color: Theme.of(context).primaryColor),
-                      decoration: InputDecoration(
-                          hintText: "meuemail@email.com",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          errorText: controller.emailError),
+                      decoration: InputDecoration(hintText: "meuemail@email.com", border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), errorText: controller.emailError),
                     );
                   }),
                   SizedBox(
@@ -93,21 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: true,
                     onChanged: controller.setSenha,
                     style: TextStyle(color: Theme.of(context).primaryColor),
-                    decoration: InputDecoration(
-                        hintText: "******",
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2)),
-                        errorText: controller.senhaError),
+                    decoration: InputDecoration(hintText: "******", border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), errorText: controller.senhaError),
                   ),
                   SizedBox(
                     height: 20,
@@ -121,15 +92,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(color: Theme.of(context).primaryColor),
                     decoration: InputDecoration(
                       hintText: "******",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).primaryColor, width: 2)),
+                      border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
                     ),
                   ),
                   SizedBox(
@@ -146,29 +111,25 @@ class _RegisterPageState extends State<RegisterPage> {
                           Modular.to.pushReplacementNamed("/home");
                         } else {
                           showDialog(
-                              context: context,
-                              child: AlertDialog(
-                                content: Text(
-                                    "Erro ao tentar efetuar o login! Tente novamente!"),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text("Fechar"),
-                                    onPressed: () {
-                                      Modular.to.pop();
-                                    },
-                                  )
-                                ],
-                              ));
+                              builder: (context) => AlertDialog(
+                                    content: Text("Erro ao tentar efetuar o login! Tente novamente!"),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("Fechar"),
+                                        onPressed: () {
+                                          Modular.to.pop();
+                                        },
+                                      )
+                                    ],
+                                  ),
+                              context: context);
                         }
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           "Login",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

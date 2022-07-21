@@ -4,25 +4,23 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../../../app/modules/auth/auth_controller.dart';
-import '../../../app/modules/auth/auth_module.dart';
 import '../../../app/shared/widgets/label/label_widget.dart';
 
 class AuthPage extends StatefulWidget {
   final String title;
-  const AuthPage({Key key, this.title = "Auth"}) : super(key: key);
+  const AuthPage({Key? key, this.title = "Auth"}) : super(key: key);
 
   @override
   _AuthPageState createState() => _AuthPageState();
 }
 
 class _AuthPageState extends State<AuthPage> {
-  AuthController controller = AuthModule.to.get<AuthController>();
+  AuthController controller = Modular.get<AuthController>();
 
   FocusNode focusNodeEmail = FocusNode();
   FocusNode focusNodeSenha = FocusNode();
 
-  _fieldFocsChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  _fieldFocsChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -33,8 +31,7 @@ class _AuthPageState extends State<AuthPage> {
     if (result) {
       Modular.to.pushReplacementNamed("/home");
     } else {
-      showToast("Erro ao tentar efetuar o login! Tente novamente!",
-          position: ToastPosition.bottom);
+      showToast("Erro ao tentar efetuar o login! Tente novamente!", position: ToastPosition.bottom);
     }
   }
 
@@ -85,26 +82,11 @@ class _AuthPageState extends State<AuthPage> {
                       focusNode: focusNodeEmail,
                       onChanged: controller.setEmail,
                       onEditingComplete: () {
-                        _fieldFocsChange(
-                            context, focusNodeEmail, focusNodeSenha);
+                        _fieldFocsChange(context, focusNodeEmail, focusNodeSenha);
                       },
                       style: TextStyle(color: Theme.of(context).primaryColor),
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                          hintText: "meuemail@email.com",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          errorText: controller.emailError),
+                      decoration: InputDecoration(hintText: "meuemail@email.com", border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), errorText: controller.emailError),
                     );
                   }),
                   SizedBox(
@@ -122,21 +104,7 @@ class _AuthPageState extends State<AuthPage> {
                         await _login();
                       },
                       style: TextStyle(color: Theme.of(context).primaryColor),
-                      decoration: InputDecoration(
-                          hintText: "******",
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 2)),
-                          errorText: controller.senhaError),
+                      decoration: InputDecoration(hintText: "******", border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2)), errorText: controller.senhaError),
                     );
                   }),
                   SizedBox(
@@ -153,10 +121,7 @@ class _AuthPageState extends State<AuthPage> {
                         padding: const EdgeInsets.all(10),
                         child: Text(
                           "Login",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

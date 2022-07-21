@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class CustomComboboxWidget extends StatelessWidget {
   final List<Model> items;
-  final Function(Model) onChange;
-  final Model itemSelecionado;
-  final String errorText;
+  final void Function(Model) onChange;
+  final Model? itemSelecionado;
+  final String? errorText;
 
   const CustomComboboxWidget({
-    Key key,
-    @required this.items,
-    @required this.onChange,
-    @required this.itemSelecionado,
+    Key? key,
+    required this.items,
+    required this.onChange,
+    required this.itemSelecionado,
     this.errorText,
   }) : super(key: key);
   @override
@@ -21,14 +21,15 @@ class CustomComboboxWidget extends StatelessWidget {
       children: <Widget>[
         FindDropdown<Model>(
           items: items,
-          onChanged: onChange,
+          onChanged: (item) {
+            if (item != null) {
+              onChange(item);
+            }
+          },
           selectedItem: itemSelecionado,
           dropdownBuilder: (_, model) {
             return Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  border: Border.all(
-                      width: 2, color: Theme.of(context).primaryColor)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), border: Border.all(width: 2, color: Theme.of(context).primaryColor)),
               child: model?.id == null
                   ? ListTile(
                       title: Text(
@@ -38,7 +39,7 @@ class CustomComboboxWidget extends StatelessWidget {
                     )
                   : ListTile(
                       title: Text(
-                        model.descricao,
+                        model?.descricao ?? 'Não informado',
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
                     ),
@@ -49,7 +50,7 @@ class CustomComboboxWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              errorText,
+              errorText ?? 'Alguma coisa não está certa',
               style: TextStyle(color: Colors.red),
             ),
           ),

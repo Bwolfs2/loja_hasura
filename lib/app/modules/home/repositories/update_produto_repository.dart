@@ -8,8 +8,7 @@ class UpdateProdutoRepository extends Disposable {
 
   UpdateProdutoRepository(this._hasuraConnect);
 
-  Future<ProdutoTipoCategoriaProdutoDto> getProdutoTipoCategoriaProduto(
-      String idProduto) async {
+  Future<ProdutoTipoCategoriaProdutoDto> getProdutoTipoCategoriaProduto(String idProduto) async {
     var query = r''' 
            query getProdutoTipoCategoriaProduto($idProduto: uuid!) {
               tipo_produto {
@@ -37,18 +36,14 @@ class UpdateProdutoRepository extends Disposable {
             }
       ''';
 
-    var snapshot =
-        await _hasuraConnect.query(query, variables: {"idProduto": idProduto});
+    var snapshot = await _hasuraConnect.query(query, variables: {
+      "idProduto": idProduto
+    });
 
     return ProdutoTipoCategoriaProdutoDto.fromMap(snapshot["data"]);
   }
 
-  Future<bool> updateProduto(
-      {String idProduto,
-      String descricao,
-      String valor,
-      String selectedTipo,
-      String selectedCategoria}) async {
+  Future<bool> updateProduto({String? idProduto, String? descricao, String? valor, String? selectedTipo, String? selectedCategoria}) async {
     try {
       var mutation = r''' 
            mutation update_produto($idProduto: uuid, $nome: String, $categoria: uuid, $tipo: uuid, $valor: float8) {
@@ -68,12 +63,12 @@ class UpdateProdutoRepository extends Disposable {
         "nome": descricao,
         "categoria": selectedCategoria,
         "tipo": selectedTipo,
-        "valor": double.parse(valor),
+        "valor": double.parse(valor ?? '0'),
         "idProduto": idProduto,
       });
 
       return snapshot["data"]["update_produto"]["affected_rows"] > 0;
-    } on Exception catch (e) {
+    } on Exception {
       return false;
     }
   }

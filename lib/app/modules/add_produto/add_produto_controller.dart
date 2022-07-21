@@ -24,13 +24,13 @@ abstract class _AddProdutoBase with Store {
   String valor = "";
 
   @observable
-  String descricaoError;
+  String? descricaoError;
   @observable
-  String valorError;
+  String? valorError;
   @observable
-  String selectedCategoriaError;
+  String? selectedCategoriaError;
   @observable
-  String selectedTipoError;
+  String? selectedTipoError;
 
   @action
   void setDescricao(String _desc) {
@@ -45,7 +45,7 @@ abstract class _AddProdutoBase with Store {
   }
 
   @observable
-  TipoECategoriaDto selectedCategoria;
+  TipoECategoriaDto? selectedCategoria;
 
   @action
   void setSelectedCategoria(TipoECategoriaDto _selectedCategoria) {
@@ -53,7 +53,7 @@ abstract class _AddProdutoBase with Store {
   }
 
   @observable
-  TipoECategoriaDto selectedTipo;
+  TipoECategoriaDto? selectedTipo;
 
   @action
   void setSelectedTipo(TipoECategoriaDto _selectedTipo) {
@@ -61,13 +61,13 @@ abstract class _AddProdutoBase with Store {
   }
 
   @observable
-  TipoCategoriaProdutoDto tipoProduto;
+  TipoCategoriaProdutoDto? tipoProduto;
 
   bool isValid = true;
 
   void _validDescricao() {
     descricao = descricao.trim();
-    if (descricao == null || descricao.length == 0) {
+    if (descricao.isEmpty) {
       descricaoError = "Descricao invalida!!";
       isValid = false;
     } else {
@@ -77,7 +77,7 @@ abstract class _AddProdutoBase with Store {
 
   _validValor() {
     valor = valor.trim();
-    if (valor == null || valor.length == 0) {
+    if (valor.isEmpty) {
       valorError = "Valor invalida!!";
       isValid = false;
     } else {
@@ -87,7 +87,7 @@ abstract class _AddProdutoBase with Store {
 
   @action
   Future<bool> salvar() async {
-    bool isValid = true;
+    var isValid = true;
     _validDescricao();
     _validValor();
 
@@ -106,8 +106,7 @@ abstract class _AddProdutoBase with Store {
     }
 
     if (isValid) {
-      return await addProdutoRepository.addproduto(
-          descricao, valor, selectedTipo.id, selectedCategoria.id);
+      return await addProdutoRepository.addproduto(descricao, valor, selectedTipo?.id ?? '', selectedCategoria?.id ?? '');
     }
     return false;
   }

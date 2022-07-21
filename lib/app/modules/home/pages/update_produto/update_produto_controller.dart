@@ -7,21 +7,20 @@ import '../../../../../app/modules/home/repositories/update_produto_repository.d
 
 part 'update_produto_controller.g.dart';
 
-class UpdateProdutoController = _UpdateProdutoBase
-    with _$UpdateProdutoController;
+class UpdateProdutoController = _UpdateProdutoBase with _$UpdateProdutoController;
 
 abstract class _UpdateProdutoBase with Store {
   final UpdateProdutoRepository updateProdutoRepository;
-  final String idProduto;
-  _UpdateProdutoBase(this.updateProdutoRepository, this.idProduto) {
-    updateProdutoRepository
-        .getProdutoTipoCategoriaProduto(idProduto)
-        .then((data) {
+  late final String idProduto;
+  _UpdateProdutoBase(this.updateProdutoRepository);
+
+  void init(String _idProduto) {
+    updateProdutoRepository.getProdutoTipoCategoriaProduto(idProduto).then((data) {
       updatedProduto = data;
-      valor = updatedProduto.produto.valor.toString();
-      descricao = updatedProduto.produto.nome;
-      selectedCategoria = updatedProduto.produto.categoriaProduto;
-      selectedTipo = updatedProduto.produto.tipoProduto;
+      valor = updatedProduto?.produto.valor.toString() ?? '';
+      descricao = updatedProduto?.produto.nome ?? '';
+      selectedCategoria = updatedProduto?.produto.categoriaProduto;
+      selectedTipo = updatedProduto?.produto.tipoProduto;
       descricaoController.text = descricao;
       valorController.text = valor;
     });
@@ -37,19 +36,19 @@ abstract class _UpdateProdutoBase with Store {
   String valor = "";
 
   @observable
-  TipoECategoriaDto selectedCategoria;
+  TipoECategoriaDto? selectedCategoria;
 
   @observable
-  TipoECategoriaDto selectedTipo;
+  TipoECategoriaDto? selectedTipo;
 
   @observable
-  String descricaoError;
+  String? descricaoError;
   @observable
-  String valorError;
+  String? valorError;
   @observable
-  String selectedCategoriaError;
+  String? selectedCategoriaError;
   @observable
-  String selectedTipoError;
+  String? selectedTipoError;
 
   @action
   void setDescricao(String _desc) {
@@ -74,13 +73,13 @@ abstract class _UpdateProdutoBase with Store {
   }
 
   @observable
-  ProdutoTipoCategoriaProdutoDto updatedProduto;
+  ProdutoTipoCategoriaProdutoDto? updatedProduto;
 
   bool isValid = true;
 
   _validDescricao() {
     descricao = descricao.trim();
-    if (descricao == null || descricao.length == 0) {
+    if (descricao.isEmpty) {
       descricaoError = "Descricao invalida!!";
       isValid = false;
     } else {
@@ -90,7 +89,7 @@ abstract class _UpdateProdutoBase with Store {
 
   _validValor() {
     valor = valor.trim();
-    if (valor == null || valor.length == 0) {
+    if (valor.isEmpty) {
       valorError = "Valor invalida!!";
       isValid = false;
     } else {
@@ -123,8 +122,8 @@ abstract class _UpdateProdutoBase with Store {
         idProduto: idProduto,
         descricao: descricao,
         valor: valor,
-        selectedTipo: selectedTipo.id,
-        selectedCategoria: selectedCategoria.id,
+        selectedTipo: selectedTipo?.id,
+        selectedCategoria: selectedCategoria?.id,
       );
     }
     return false;
