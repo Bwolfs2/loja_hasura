@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:hive_cache_interceptor/hive_cache_interceptor.dart';
@@ -30,7 +31,8 @@ class TokenInterceptor extends InterceptorBase implements Interceptor {
       try {
         request.headers["Authorization"] = "Bearer $token";
         return request;
-      } catch (e) {
+      } on Exception {
+        debugPrintStack(stackTrace: StackTrace.current);
         return null;
       }
     } else {
