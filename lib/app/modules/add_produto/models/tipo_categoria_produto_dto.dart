@@ -37,7 +37,7 @@ class TipoCategoriaProdutoDto {
       };
 
   List<TipoCategoriaProdutoDto> fromJsonList(List list) {
-    var a = list.map(TipoCategoriaProdutoDto.fromMap);
+    final a = list.map(TipoCategoriaProdutoDto.fromMap);
     return a.toList();
   }
 }

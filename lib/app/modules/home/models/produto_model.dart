@@ -32,7 +32,7 @@ class ProdutoModel {
         categoriaProduto: categoriaProduto ?? this.categoriaProduto,
       );
 
-  static ProdutoModel fromMap(Map<String, dynamic> json) => ProdutoModel(
+  static ProdutoModel fromMap(dynamic json) => ProdutoModel(
         id: json["id"],
         nome: json["nome"],
         valor: json["valor"].toDouble(),

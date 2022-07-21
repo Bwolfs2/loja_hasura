@@ -2,7 +2,7 @@
 //
 //     final produtoTipoCategoriaProdutoDto = produtoTipoCategoriaProdutoDtoFromJson(jsonString);
 
-import '../../../../app/modules/add_produto/models/tipo_categoria_produto_dto.dart';
+import '../../add_produto/models/tipo_categoria_produto_dto.dart';
 
 class ProdutoTipoCategoriaProdutoDto {
   final List<TipoECategoriaDto> tipoProduto;
@@ -26,7 +26,7 @@ class ProdutoTipoCategoriaProdutoDto {
         produto: produto ?? this.produto,
       );
 
-  factory ProdutoTipoCategoriaProdutoDto.fromMap(Map<String, dynamic> json) => ProdutoTipoCategoriaProdutoDto(
+  factory ProdutoTipoCategoriaProdutoDto.fromMap(dynamic json) => ProdutoTipoCategoriaProdutoDto(
         tipoProduto: List<TipoECategoriaDto>.from(json["tipo_produto"].map(TipoECategoriaDto.fromMap)),
         categoriaProduto: List<TipoECategoriaDto>.from(json["categoria_produto"].map(TipoECategoriaDto.fromMap)),
         produto: Produto.fromMap(json["produto_by_pk"]),
