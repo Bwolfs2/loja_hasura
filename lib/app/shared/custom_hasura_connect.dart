@@ -30,7 +30,7 @@ class TokenInterceptor extends InterceptorBase implements Interceptor {
       try {
         request.headers["Authorization"] = "Bearer $token";
         return request;
-      } catch (e) {
+      } on Exception {
         return null;
       }
     } else {

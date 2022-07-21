@@ -9,10 +9,12 @@ import 'app/app_widget.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(OKToast(
-    child: ModularApp(
-      module: AppModule(),
-      child: AppWidget(),
+  runApp(
+    OKToast(
+      child: ModularApp(
+        module: AppModule(),
+        child: AppWidget(),
+      ),
     ),
-  ));
+  );
 }

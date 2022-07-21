@@ -2,8 +2,6 @@
 //
 //     final tipoCategoriaProdutoDto = tipoCategoriaProdutoDtoFromJson(jsonString);
 
-import 'dart:convert';
-
 ///
 class TipoCategoriaProdutoDto {
   ///tipos de produtos
@@ -28,11 +26,7 @@ class TipoCategoriaProdutoDto {
         categoriaProduto: categoriaProduto ?? this.categoriaProduto,
       );
 
-  factory TipoCategoriaProdutoDto.fromJson(String str) => TipoCategoriaProdutoDto.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  static TipoCategoriaProdutoDto fromMap(Map<String, dynamic> json) => TipoCategoriaProdutoDto(
+  static TipoCategoriaProdutoDto fromMap(dynamic json) => TipoCategoriaProdutoDto(
         tipoProduto: List<TipoECategoriaDto>.from(json["tipo_produto"].map(TipoECategoriaDto.fromMap)),
         categoriaProduto: List<TipoECategoriaDto>.from(json["categoria_produto"].map(TipoECategoriaDto.fromMap)),
       );
@@ -43,8 +37,7 @@ class TipoCategoriaProdutoDto {
       };
 
   List<TipoCategoriaProdutoDto> fromJsonList(List list) {
-    // ignore: unnecessary_lambdas
-    var a = list.map((e) => TipoCategoriaProdutoDto.fromMap(e));
+    var a = list.map(TipoCategoriaProdutoDto.fromMap);
     return a.toList();
   }
 }
@@ -67,11 +60,7 @@ class TipoECategoriaDto {
         descricao: descricao ?? this.descricao,
       );
 
-  factory TipoECategoriaDto.fromJson(String str) => TipoECategoriaDto.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory TipoECategoriaDto.fromMap(Map<String, dynamic> json) => TipoECategoriaDto(
+  factory TipoECategoriaDto.fromMap(dynamic json) => TipoECategoriaDto(
         id: json["id"],
         descricao: json["descricao"],
       );

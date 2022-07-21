@@ -31,7 +31,6 @@ class HomeRepository extends Disposable {
     });
   }
 
-  //dispose will be called automatically
   @override
   void dispose() {}
 }

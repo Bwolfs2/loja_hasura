@@ -112,8 +112,8 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    child: RaisedButton(
-                      color: Theme.of(context).primaryColor,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
                       onPressed: () async {
                         await _login();
                       },
@@ -131,7 +131,7 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    child: FlatButton(
+                    child: TextButton(
                       child: Text(
                         "Criar nova Conta",
                         style: TextStyle(color: Theme.of(context).primaryColor),
